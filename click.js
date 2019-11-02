@@ -4,7 +4,7 @@ var server=http.createServer((function(request,response) {
 		{"Content-Type" : "text/plain"}
 	);
 	
-	response.end("Hello World\n");
+	response.end("Oh yeah\n");
 }));
 
 server.listen(7000);
