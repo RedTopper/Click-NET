@@ -171,6 +171,7 @@ class Runtime {
             }
 
             let json = JSON.parse(data);
+            console.log(json);
             runtime.load(json);
             console.log("Loaded!");
         });

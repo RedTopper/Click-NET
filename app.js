@@ -52,10 +52,12 @@ setInterval(function () {
 
 setInterval(function () {
     wss.clients.forEach(function (socket) {
+        console.log(runtime);
         socket.send(
             JSON.stringify({
                 type: 'update',
                 monster: runtime.monster,
+                players: runtime.players,
                 scene: runtime.scene
             })
         );

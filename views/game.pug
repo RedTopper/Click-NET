@@ -10,9 +10,9 @@ block content
                 #spells.card
                     h5.card-header Spells
                     .list-group.list-group-flush
-                        a.list-group-item(href="?") Test
-                        a.list-group-item(href="?") Test2
-                        a.list-group-item(href="?") Test3
+                        a.list-group-item.active Test
+                        a.list-group-item Test2
+                        a.list-group-item Test3
             .col-sm-4.p-1
                 #monster.card
                     img#attack.card-img-top.monster-scene(v-bind:src="'/images/bad/' + name + '.png'" alt="Unknown")
@@ -32,17 +32,16 @@ block content
                         p.card-text Level: {{ level }}
                         p.card-text Clicks: {{ clicks }}
                         small.card-text ID: {{ id }}
-                    ul.list-group.list-group-flush
-                        li.list-group-item Player 2
-                        li.list-group-item Player 3
+                    #players.ul.list-group.list-group-flush
+                        li.list-group-item(v-for="p in players") {p}
         .row
             .col-sm-4.p-1
                 .card
                     h5.card-header Upgrades
                     .list-group.list-group-flush
-                        a.list-group-item(href="#") Test
-                        a.list-group-item(href="#") Test2
-                        a.list-group-item(href="#") Test3
+                        a.list-group-item Test
+                        a.list-group-item Test2
+                        a.list-group-item Test3
 
         .row
             .col-sm-10.p-1
