@@ -37,8 +37,8 @@ class Runtime {
         return this.players
     }
 
-    join() {
-        
+    join(id, name) {
+        console.log(id, name);
     }
 }
 
