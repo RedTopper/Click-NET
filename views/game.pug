@@ -3,10 +3,8 @@ extends layout
 block content
     div.container
         .row
-            .col-sm-8.p-1
-                h1.display-1.titlefont Click-NET
-            .col-sm-4.p-1
-                a.btn.btn-primary.align-right(href="/quit") Leave Game
+            .col-sm-12.p-1
+                h1.display-1.titlefont.text-center Click-NET
         .row
             .col-sm-4.p-1
                 #spells.card
@@ -42,15 +40,17 @@ block content
                 .card
                     h5.card-header Upgrades
                     .list-group.list-group-flush
-                        a.list-group-item(href="?") Test
-                        a.list-group-item(href="?") Test2
-                        a.list-group-item(href="?") Test3
+                        a.list-group-item(href="#") Test
+                        a.list-group-item(href="#") Test2
+                        a.list-group-item(href="#") Test3
 
         .row
-            .col-sm-12.p-1
+            .col-sm-10.p-1
                 .card
                     h5.card-header Log
                     p.p-2.card-text.overflow-auto Testserserserasdf
+            .col-sm-2.p-1
+                a.btn.btn-primary.align-right(href="/quit") Leave Game
 
 
         script(src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js")
