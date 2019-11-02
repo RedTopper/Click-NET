@@ -15,7 +15,7 @@ block content
                         a.list-group-item(href="?") Test3
             .col-sm-4.p-1
                 #monster.card
-                    img.card-img-top.monster-scene(v-bind:src="'/images/bad/' + name + '.png'" alt="Unknown")
+                    img#attack.card-img-top.monster-scene(v-bind:src="'/images/bad/' + name + '.png'" alt="Unknown")
                     img.card-img-top.background-scene(v-bind:src="'/images/backgrounds/' + background + '.png'" alt="Unknown")
                     .card-body
                         h5.card-title {{ display }}

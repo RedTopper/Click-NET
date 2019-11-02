@@ -9,6 +9,7 @@ const types = [
 
 const monsters = {
     spider: {
+        name: 'spider',
         display: 'Spider',
         health: 1000,
         attacks: {
@@ -19,6 +20,7 @@ const monsters = {
         }
     },
     alien: {
+        name: 'alien',
         display: 'Alien',
         health: 1500,
         attacks: {
@@ -29,6 +31,7 @@ const monsters = {
         }
     },
     worm: {
+        name: 'worm',
         display: 'Worm',
         health: 700,
         attacks: {
@@ -43,6 +46,7 @@ const monsters = {
         }
     },
     small_domino: {
+        name: 'small_domino',
         display: 'Domino Baby',
         health: 1800,
         attacks: {
@@ -178,6 +182,9 @@ class Runtime {
         this.stage = 0;
         this.players = [];
         this.monster = monsters.spider;
+        this.scene = {
+            background: 'windows'
+        }
     }
 
     load(json) {
@@ -186,6 +193,7 @@ class Runtime {
         this.key(json, 'killsStage');
         this.key(json, 'killsTotal');
         this.key(json, 'monster');
+        this.key(json, 'scene');
     }
 
     save() {

@@ -22,45 +22,25 @@ let monster = new Vue({
     }
 });
 
-
-class Monster {
-
-}
-
-class Message {
-    constructor(json) {
-        this.player = json.player;
-        this.text = json.text;
-        this.time = new Date(json.time).toLocaleTimeString();
-    }
-}
+$('#attack').click(function () {
+    $.getJSON( "/game/attack", function( data ) {});
+});
 
 ws.onmessage = function (event) {
   let json = JSON.parse(event.data);
 
   switch (json.type) {
-      case "monster":
-          update(json.body);
-          break;
-      case "connect":
-          connect(json.body);
-          break;
-      case "message":
-          message(new Message(json.body));
+      case "update":
+          wsUpdate(json.monster, json.scene);
           break;
       default:
           console.log("Cannot handle " + json.type);
   }
 };
 
-function update() {
-
-}
-
-function connect() {
-
-}
-
-function message(message) {
-    console.log(message);
+function wsUpdate(jsMon, jsScene) {
+    monster.name = jsMon.name;
+    monster.display = jsMon.display;
+    monster.health = jsMon.health;
+    monster.background = jsScene.background;
 }
