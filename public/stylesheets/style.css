@@ -7,6 +7,11 @@ a {
     color: #00B7FF;
 }
 
+.titlefont{
+    font-family: 'Press Start 2P', cursive;
+    color: WHITE;
+}
+
 .name {
     font-size: 3rem !important;
 }
@@ -20,14 +25,18 @@ body, html {
 }
 
 .bg {
-    /* The image used */
-    background-image: url("/images/background.jpg");
-
-    /* Full height */
-    height: 100%;
-
-    /* Center and scale the image nicely */
+    background-image: url("/images/background2.jpg");
+    background-attachment: fixed;
     background-position: center;
     background-repeat: no-repeat;
     background-size: cover;
+}
+
+#classes {
+    font-size: 18px;
+    text-shadow:
+            -1px -1px 0 black,
+            1px -1px 0 black,
+            -1px 1px 0 black,
+            1px 1px 0 black;
 }
