@@ -1,6 +1,52 @@
 const fs = require("fs");
 const uuid = require('uuid/v4');
 
+const types = [
+    'paladin',
+    'swordsman',
+    'mage'
+];
+
+const progress = [
+    {
+        required: 10,
+        backgrounds: [
+            'windows',
+            'cave'
+        ],
+        enemies: [
+           'spider',
+           'alien'
+        ],
+        healthMin: 1000,
+        healthMax: 1100
+    },
+    {
+        required: 1,
+        background: [
+            'fire'
+        ],
+        enemies: [
+           'small_domino'
+        ],
+        healthMin: 5000,
+        healthMax: 6000
+    },
+    {
+        required: 10,
+        background: [
+            'castle'
+        ],
+        enemies: [
+            'worm',
+            'alien',
+            'spider',
+        ],
+        healthMin: 2000,
+        healthMax: 2500
+    }
+];
+
 class Runtime {
     constructor() {
         this.defaults();
@@ -49,12 +95,6 @@ class Runtime {
     }
 
     join(res, id, name = undefined, type = undefined) {
-        const types = [
-            'paladin',
-            'swordsman',
-            'mage'
-        ];
-
         if (id !== undefined) {
             let found = this.get(id);
             if (found) {
@@ -87,6 +127,8 @@ class Runtime {
         let player = {
             id: uuid(),
             name: name.substring(0, 12),
+            level: 1,
+            clicks: 0,
             type: type
         };
 
