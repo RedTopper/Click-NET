@@ -1,8 +1,11 @@
 extends layout
 
 block content
-  link(href="https://stackpath.bootstrapcdn.com/bootswatch/4.3.1/sketchy/bootstrap.min.css", rel="stylesheet", integrity="sha384-N8DsABZCqc1XWbg/bAlIDk7AS/yNzT5fcKzg/TwfmTuUqZhGquVmpb5VvfmLcMzp", crossorigin="anonymous")
-  h1= title
-  p Hello to #{title}
-  a(href='http://localhost:3000/game')
-    img(src='/images/candy_click.jpg' alt='Caramel Candy' style='width:280px;height:256px;')
+  div.p-5.bg
+    div.container
+      h1.text-center.display-1 Click-NET
+      div.row
+        div.col-sm-6.mx-auto
+          form(action='/game' method='post')
+            input.form-control.form-control-lg.name.mb-4.mt-4(type='text' name='name' placeholder='enter name' maxlength="12")
+            button.btn.btn-primary.btn-lg.btn-block(type='submit' value='submit') Start Game!

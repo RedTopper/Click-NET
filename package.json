@@ -12,9 +12,12 @@
     "http-errors": "~1.6.3",
     "morgan": "~1.9.1",
     "pug": "^2.0.4",
+    "uuid": "^3.3.3",
     "ws": "^7.2.0"
   },
   "nodemonConfig": {
-    "ignore": ["runtime.json"]
+    "ignore": [
+      "runtime.json"
+    ]
   }
 }
