@@ -13,7 +13,7 @@ a {
 }
 
 .name {
-    font-size: 3rem !important;
+    font-size: 1rem !important;
 }
 
 .name::placeholder {
@@ -34,6 +34,7 @@ body, html {
 
 #classes {
     font-size: 18px;
+    border: 5px solid BLACK;
     text-shadow:
             -1px -1px 0 black,
             1px -1px 0 black,
