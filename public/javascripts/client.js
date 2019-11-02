@@ -1,5 +1,12 @@
 let ws = new WebSocket("ws://" + location.hostname + ":6969");
 
+let app = new Vue({
+    el: '#app',
+    data: {
+        message: 'Hello Vue!'
+    }
+});
+
 class Monster {
 
 }

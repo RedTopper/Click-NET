@@ -9,7 +9,8 @@ const Runtime = require('./game/runtime');
 let wss = new WebSocket.Server({port: 6969});
 let runtime = new Runtime();
 
-const indexRouter = require('./routes/index');
+const game = require('./routes/game');
+const index = require('./routes/index');
 
 const app = express();
 
@@ -25,7 +26,8 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
-app.use('/', indexRouter);
+app.use('/', index);
+app.use('/game', game);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
