@@ -1,7 +1,11 @@
 extends layout
 
 block content
-  h1= title
-  p Hello to #{title}
-  a(href='http://localhost:3000/game')
-    img(src='/images/candy_click.jpg' alt='Caramel Candy' style='width:280px;height:256px;')
+  div.p-5.bg
+    div.container
+      h1.text-center.display-1 Click-NET
+      div.row
+        div.col-sm-6.mx-auto
+          form(action='/game' method='post')
+            input.form-control.form-control-lg.name(type='text' placeholder='enter name')
+            button.btn.btn-primary.btn-lg.btn-block(type='submit' value='submit') Start Game!
