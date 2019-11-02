@@ -1,6 +1,7 @@
 extends layout
 
 block content
+  script(src="javascripts/landing.js")
   div.p-5.bg
     div.container
       h1.text-center.display-1 Click-NET
@@ -8,9 +9,9 @@ block content
         div.col-sm-6.mx-auto
           #classes.carousel.slide(data-ride='carousel' data-interval="false")
             ol.carousel-indicators
-              li.active(data-target='#classes' data-slide-to='0')
-              li(data-target='#classes' data-slide-to='1')
-              li(data-target='#classes' data-slide-to='2')
+              li#paladin.active(data-target='#classes' data-slide-to='0')
+              li#swordsman(data-target='#classes' data-slide-to='1')
+              li#mage(data-target='#classes' data-slide-to='2')
             .carousel-inner
               .carousel-item.active
                 img.d-block.w-100(src='...' alt='First slide')
@@ -25,6 +26,7 @@ block content
               span.carousel-control-next-icon(aria-hidden='true')
               span.sr-only Next
 
-          form(action='/game' method='post')
+          form#name(action='/game' method='post')
             input.form-control.form-control-lg.name.mb-4.mt-4(type='text' name='name' placeholder='enter name' minlength='3' maxlength='12')
+            input#type(type='hidden' name='type' value='')
             button.btn.btn-primary.btn-lg.btn-block(type='submit' value='submit') Start Game!

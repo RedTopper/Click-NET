@@ -5,6 +5,7 @@ const router = express.Router();
 router.get('/', function(req, res) {
   if (req.cookies['id']) {
     res.redirect('/game');
+    return;
   }
 
   let runtime = req.app.get('runtime');
@@ -14,14 +15,25 @@ router.get('/', function(req, res) {
   })
 });
 
-router.post('/game', function(req, res) {
-  let player = req.app.get('runtime').join(req.cookies['id'], req.body.name, req.body.type);
-  if (player === false) {
-    res.redirect("/");
-    return;
-  }
-
-  res.render('game');
+router.get('/quit', function (req, res) {
+  let runtime = req.app.get('runtime');
+  runtime.quit(req.cookies['id']);
+  res.clearCookie('id');
+  res.redirect("/");
 });
+
+router.get('/game', join);
+router.post('/game', join);
+
+function join(req, res) {
+  let runtime = req.app.get('runtime');
+  let player = runtime.join(res, req.cookies['id'], req.body.name, req.body.type);
+
+  if (player) {
+    res.render('game', {player: player});
+  } else {
+    res.redirect("/");
+  }
+}
 
 module.exports = router;
