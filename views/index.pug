@@ -7,5 +7,5 @@ block content
       div.row
         div.col-sm-6.mx-auto
           form(action='/game' method='post')
-            input.form-control.form-control-lg.name.mb-4.mt-4(type='text' name='name' placeholder='enter name' maxlength="12")
+            input.form-control.form-control-lg.name.mb-4.mt-4(type='text' name='name' placeholder='enter name' minlength='3' maxlength='12')
             button.btn.btn-primary.btn-lg.btn-block(type='submit' value='submit') Start Game!

@@ -1,5 +1,4 @@
 const express = require('express');
-const uuid = require('uuid/v4');
 const router = express.Router();
 
 /* GET home page. */
@@ -16,7 +15,11 @@ router.get('/', function(req, res) {
 });
 
 router.post('/game', function(req, res) {
-  req.app.get('runtime').join(req.cookies['id'], req.body.name);
+  let player = req.app.get('runtime').join(req.cookies['id'], req.body.name, req.body.type);
+  if (player === false) {
+    res.redirect("/");
+    return;
+  }
 
   res.render('game');
 });
