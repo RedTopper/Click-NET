@@ -6,6 +6,25 @@ block content
       h1.text-center.display-1 Click-NET
       div.row
         div.col-sm-6.mx-auto
+          #classes.carousel.slide(data-ride='carousel' data-interval="false")
+            ol.carousel-indicators
+              li.active(data-target='#classes' data-slide-to='0')
+              li(data-target='#classes' data-slide-to='1')
+              li(data-target='#classes' data-slide-to='2')
+            .carousel-inner
+              .carousel-item.active
+                img.d-block.w-100(src='...' alt='First slide')
+              .carousel-item
+                img.d-block.w-100(src='...' alt='Second slide')
+              .carousel-item
+                img.d-block.w-100(src='...' alt='Third slide')
+            a.carousel-control-prev(href='#classes' role='button' data-slide='prev')
+              span.carousel-control-prev-icon(aria-hidden='true')
+              span.sr-only Previous
+            a.carousel-control-next(href='#classes' role='button' data-slide='next')
+              span.carousel-control-next-icon(aria-hidden='true')
+              span.sr-only Next
+
           form(action='/game' method='post')
             input.form-control.form-control-lg.name.mb-4.mt-4(type='text' name='name' placeholder='enter name' maxlength="12")
             button.btn.btn-primary.btn-lg.btn-block(type='submit' value='submit') Start Game!
