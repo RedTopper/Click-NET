@@ -1,9 +1,7 @@
 extends layout
 
 block content
-    #app
-        | {{ message }}
-
-    script(src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js")
-    script(src="javascripts/client.js")
-
+    div.container
+        #app {{ message }}
+        script(src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js")
+        script(src="javascripts/client.js")
