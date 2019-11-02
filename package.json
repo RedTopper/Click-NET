@@ -1,0 +1,22 @@
+{
+  "name": "click-net",
+  "version": "1.0.0",
+  "description": "click based network game",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/RedInquisitive/Click-NET.git"
+  },
+  "author": "Aaron Walter, Keyes Anderson, Andrew Peters, Grant Walter",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/RedInquisitive/Click-NET/issues"
+  },
+  "homepage": "https://github.com/RedInquisitive/Click-NET#readme",
+  "dependencies": {
+    "expressjs": "^1.0.1"
+  }
+}
