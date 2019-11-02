@@ -7,6 +7,57 @@ const types = [
     'mage'
 ];
 
+const monsters = {
+    spider: {
+        display: 'Spider',
+        health: 1000,
+        attacks: {
+            web: {
+                display: "Shoot Web",
+                damage: 10
+            }
+        }
+    },
+    alien: {
+        display: 'Alien',
+        health: 1500,
+        attacks: {
+            spit: {
+                display: "Spit",
+                damage: 9
+            }
+        }
+    },
+    worm: {
+        display: 'Worm',
+        health: 700,
+        attacks: {
+            worm: {
+                display: "Worm",
+                damage: 0
+            },
+            death_beam: {
+                display: "Laser",
+                damage: 20
+            }
+        }
+    },
+    small_domino: {
+        display: 'Domino Baby',
+        health: 1800,
+        attacks: {
+            cuteness: {
+                display: "Baby",
+                damage: -1
+            },
+            cry: {
+                display: "Cry",
+                damage: 10
+            }
+        }
+    }
+};
+
 const progress = [
     {
         required: 10,
@@ -15,11 +66,10 @@ const progress = [
             'cave'
         ],
         enemies: [
-           'spider',
-           'alien'
+           monsters.spider,
+           monsters.alien
         ],
-        healthMin: 1000,
-        healthMax: 1100
+        healthMultiplier: 1
     },
     {
         required: 1,
@@ -27,10 +77,9 @@ const progress = [
             'fire'
         ],
         enemies: [
-           'small_domino'
+           monsters.small_domino
         ],
-        healthMin: 5000,
-        healthMax: 6000
+        healthMultiplier: 5
     },
     {
         required: 10,
@@ -38,12 +87,11 @@ const progress = [
             'castle'
         ],
         enemies: [
-            'worm',
-            'alien',
-            'spider',
+            monsters.worm,
+            monsters.alien,
+            monsters.spider
         ],
-        healthMin: 2000,
-        healthMax: 2500
+        healthMultiplier: 2,
     }
 ];
 
@@ -64,16 +112,28 @@ class Runtime {
     }
 
     defaults() {
+        this.killsTotal = 0;
+        this.killsStage = 0;
+        this.stage = 0;
         this.players = [];
+        this.monster = monsters.spider;
     }
 
     load(json) {
-        if (json.players !== undefined) this.players = json.players;
+        this.key(json, 'players');
+        this.key(json, 'stage');
+        this.key(json, 'killsStage');
+        this.key(json, 'killsTotal');
+        this.key(json, 'monster');
     }
 
     save() {
         let json = JSON.stringify(this);
         fs.writeFile('runtime.json', json, 'utf8', function () {});
+    }
+
+    key(json, key) {
+        if (json[key] !== undefined) this[key] = json[key];
     }
 
     get(id) {
