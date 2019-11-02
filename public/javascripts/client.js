@@ -23,7 +23,7 @@ ws.onmessage = function (event) {
   let json = JSON.parse(event.data);
 
   switch (json.type) {
-      case "monsters":
+      case "monster":
           update(json.body);
           break;
       case "connect":
