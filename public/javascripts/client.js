@@ -1,11 +1,27 @@
 let ws = new WebSocket("ws://" + location.hostname + ":6969");
 
-let app = new Vue({
-    el: '#app',
+let player = new Vue({
+    el: '#player',
     data: {
-        message: 'Hello Vue!'
+        type: 'unknown',
+        name: '',
+        level: 0,
+        clicks: 0,
+        id: "Loading..."
     }
 });
+
+let monster = new Vue({
+    el: '#monster',
+    data: {
+        background: 'unknown',
+        name: 'unknown',
+        display: 'the unknown',
+        health: 100,
+        max: 1000
+    }
+});
+
 
 class Monster {
 

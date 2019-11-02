@@ -8,29 +8,32 @@ block content
             .col-sm-4.p-1
                 a.btn.btn-primary.align-right(href="/quit") Leave Game
         .row
-            .col-sm-4
-                .card
+            .col-sm-4.p-1
+                #spells.card
                     h5.card-header Spells
                     .list-group.list-group-flush
                         a.list-group-item(href="?") Test
                         a.list-group-item(href="?") Test2
                         a.list-group-item(href="?") Test3
             .col-sm-4.p-1
-                .card
-                    img.card-img-top(src="???" alt="Monster ALT TEXT")
+                #monster.card
+                    img.card-img-top.monster-scene(v-bind:src="'/images/bad/' + name + '.png'" alt="Unknown")
+                    img.card-img-top.background-scene(v-bind:src="'/images/backgrounds/' + background + '.png'" alt="Unknown")
                     .card-body
-                        h5.card-title Card title
-                        p.card-text Some text
+                        h5.card-title {{ display }}
+                        p.card-text HP: {{ health }} / {{ max }}
+                        .progress
+                            .progress-bar.progress-bar-striped.progress-bar-animated(role="progressbar" v-bind:style='"width: " + (health/max)*100 + "%"')
 
             .col-sm-4.p-1
-                .card
-                    img.card-img-top(src='/images/player/' + player.type + '.png' alt="Player ALT TEXT")
+                #player.card
+                    img.card-img-top(v-bind:src="'/images/player/' + type + '.png'"  alt='Unknown')
                     .card-body
-                        h3.card-title #{player.name}
-                            small  the #{player.type}
-                        p.card-text Level: #{player.level}
-                        p.card-text Clicks: #{player.clicks}
-                        small.card-text ID: #{player.id}
+                        h3.card-title {{ name }}
+                            small  the {{ type }}
+                        p.card-text Level: {{ level }}
+                        p.card-text Clicks: {{ clicks }}
+                        small.card-text ID: {{ id }}
                     ul.list-group.list-group-flush
                         li.list-group-item Player 2
                         li.list-group-item Player 3
