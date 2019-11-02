@@ -25,13 +25,8 @@ body, html {
 }
 
 .bg {
-    /* The image used */
     background-image: url("/images/background2.jpg");
-
-    /* Full height */
-    height: 100%;
-
-    /* Center and scale the image nicely */
+    background-attachment: fixed;
     background-position: center;
     background-repeat: no-repeat;
     background-size: cover;
