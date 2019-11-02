@@ -18,10 +18,12 @@ class Runtime {
 
     defaults() {
         this.count = 0;
+        this.players = [];
     }
 
     load(json) {
         this.count = json.count;
+        this.players = json.players;
     }
 
     save() {
@@ -31,9 +33,12 @@ class Runtime {
         });
     }
 
-    inc() {
-        this.count += 1;
-        return this.count;
+    players() {
+        return this.players
+    }
+
+    join() {
+        
     }
 }
 
