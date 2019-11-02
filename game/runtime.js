@@ -99,6 +99,67 @@ const progress = [
     }
 ];
 
+const skills = [
+    {
+        'paladin': {
+            0: {
+                name: 'pummel',
+                cooldown: 0,
+                damage: 2,
+            },
+            1: {
+                name: 'protect',
+                cooldown: 20,
+                damage: 0,
+            },
+        },
+        'swordsman': {
+            0: [
+                {
+                    name: 'slash',
+                    cooldown: 0,
+                    damage: 2
+                },
+            ],
+            1: [
+                {
+                    name: 'cleave',
+                    cooldown: 15,
+                    damage: 70
+                },
+            ]
+        },
+        'mage': {
+            0: [
+                {
+                    name: 'lightning bolt',
+                    cooldown: 0,
+                    damage: 1
+                },
+                {
+                    name: 'heal',
+                    cooldown: 10,
+                    damage: -10
+                },
+            ],
+            2: [
+                {
+                    name: 'fireball',
+                    cooldown: 20,
+                    damage: 50
+                },
+            ],
+            3: [
+                {
+                    name: 'tornado',
+                    cooldown: 15,
+                    damage: 45
+                },
+            ]
+        },
+    }
+];
+
 class Runtime {
     constructor() {
         this.defaults();
