@@ -2,6 +2,38 @@ extends layout
 
 block content
     div.container
-        #app {{ message }}
+        .row
+            .col-sm-4.p-1
+                .card
+                    h5.card-header Spells
+                    .list-group.list-group-flush
+                        a.list-group-item(href="?") Test
+                        a.list-group-item(href="?") Test2
+                        a.list-group-item(href="?") Test3
+            .col-sm-4.p-1
+                .card
+                    img.card-img-top(src="???" alt="Monster ALT TEXT")
+                    .card-body
+                        h5.card-title Card title
+                        p.card-text Some text
+
+            .col-sm-4.p-1
+                .card
+                    img.card-img-top(src="???" alt="Player ALT TEXT")
+                    .card-body
+                        h5.card-title PLAYER NAME
+                        p.card-text SOMETHING HERE DESC
+                    ul.list-group.list-group-flush
+                        li.list-group-item Player 2
+                        li.list-group-item Player 3
+        .row
+            .col-sm-4.p-1
+                .card
+                    h5.card-header Spells
+                    .list-group.list-group-flush
+                        a.list-group-item(href="?") Test
+                        a.list-group-item(href="?") Test2
+                        a.list-group-item(href="?") Test3
+
         script(src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js")
         script(src="javascripts/client.js")
