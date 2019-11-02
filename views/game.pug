@@ -1,7 +1,9 @@
 extends layout
 
 block content
+    #app
+        | {{ message }}
+
+    script(src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js")
     script(src="javascripts/client.js")
-    h1= player.name
-    h2= player.id
-    h2= player.type
+

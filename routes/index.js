@@ -31,8 +31,6 @@ function join(req, res) {
 
   if (player) {
     res.render('game', {player: player});
-  } else {
-    res.redirect("/");
   }
 }
 
