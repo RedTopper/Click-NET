@@ -4,7 +4,7 @@ block content
     script(src="javascripts/landing.js")
     .p-5.bg
         .container
-            h1.text-center.display-1 Click-NET
+            h1.text-center.display-4.titlefont Click-NET
             .row
                 .col-sm-6.mx-auto
                     #classes.carousel.slide(data-ride='carousel' data-interval="false")
@@ -15,10 +15,19 @@ block content
                         .carousel-inner
                             .carousel-item.active
                                 img.d-block.w-100(src='/images/player/mage.png' alt='First slide')
+                                .carousel-caption.d-none.d-md-block
+                                    b Mage
+                                    p Use spells to devastate the enemy.
                             .carousel-item
                                 img.d-block.w-100(src='/images/player/paladin.png' alt='Second slide')
+                                .carousel-caption.d-none.d-md-block
+                                    b Cleric
+                                    p Heal and buff your allies.
                             .carousel-item
                                 img.d-block.w-100(src='/images/player/swordsman.png' alt='Third slide')
+                                .carousel-caption.d-none.d-md-block
+                                    b Swordsman
+                                    p Deal massive damage.
                         a.carousel-control-prev(href='#classes' role='button' data-slide='prev')
                             span.carousel-control-prev-icon(aria-hidden='true')
                             span.sr-only Previous
@@ -27,6 +36,6 @@ block content
                             span.sr-only Next
 
                     form#name(action='/game' method='post')
-                        input.form-control.form-control-lg.name.mb-4.mt-4(type='text' name='name' placeholder='enter name' minlength='3' maxlength='12')
+                        input.form-control.form-control-lg.name.mb-3.mt-3(type='text' name='name' placeholder='enter name' minlength='3' maxlength='12')
                         input#type(type='hidden' name='type' value='')
                         button.btn.btn-primary.btn-lg.btn-block(type='submit' value='submit') Start Game!
