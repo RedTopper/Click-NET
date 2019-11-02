@@ -66,18 +66,21 @@ class Runtime {
         if (typeof name != "string") {
             console.log("WARNING: Player name not a string!");
             res.clearCookie('id');
+            res.redirect("/");
             return undefined;
         }
 
         if (name.length < 3) {
             console.log("WARNING: Player name not long enough!");
             res.clearCookie('id');
+            res.redirect("/");
             return undefined;
         }
 
         if (!types.includes(type)) {
             console.log("WARNING: Player incorrect class!");
             res.clearCookie('id');
+            res.redirect("/");
             return undefined;
         }
 
