@@ -3,7 +3,12 @@ extends layout
 block content
     div.container
         .row
+            .col-sm-8.p-1
+                h1.text-center.display-1.titlefont Click-NET
             .col-sm-4.p-1
+                a.btn.btn-primary.align-items-center(href="/quit") Quit
+        .row
+            .col-sm-4
                 .card
                     h5.card-header Spells
                     .list-group.list-group-flush
@@ -32,11 +37,18 @@ block content
         .row
             .col-sm-4.p-1
                 .card
-                    h5.card-header Spells
+                    h5.card-header Upgrades
                     .list-group.list-group-flush
                         a.list-group-item(href="?") Test
                         a.list-group-item(href="?") Test2
                         a.list-group-item(href="?") Test3
+
+        .row
+            .col-sm-12.p-1
+                .card
+                    h5.card-header Log
+                    p.p-2.card-text.overflow-auto Testserserserasdf
+
 
         script(src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js")
         script(src="javascripts/client.js")
