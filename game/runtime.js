@@ -313,7 +313,7 @@ class Runtime {
         };
 
         this.players.push(player);
-        res.cookie('id', player.id);
+        res.cookie('id',  player.id, { maxAge: Number(new Date().getTime()/1000) + 60*60*24*30 });
         console.log("NOTICE: Connected " + player.name);
 
         return player;
