@@ -8,103 +8,211 @@ const types = [
 ];
 
 const monsters = {
+    alien: {
+        name: 'alien',
+        display: 'Probing Alien',
+        health: 1300,
+        attacks: [
+            {
+                display: "Spit",
+                damage: 7
+            }
+        ]
+    },
+    beefcake_domino: {
+        name: 'beefcake_domino',
+        display: 'Beefcake Domino',
+        health: 2000,
+        attacks: [
+            {
+                display: "Think",
+                damage: -2
+            },
+            {
+                display: "Nail Bat",
+                damage: 18
+            }
+        ]
+    },
+    brain: {
+        name: 'brain',
+        display: 'Brainy Monk',
+        health: 900,
+        attacks: [
+            {
+                display: "Punch",
+                damage: 10
+            },
+            {
+                display: "Total Focus",
+                damage: 35
+            }
+        ]
+    },
+    creep: {
+        name: 'creep',
+        display: 'Creeper',
+        health: 500,
+        attacks: [
+            {
+                display: "Death's Kiss",
+                damage: 50
+            }
+        ]
+    },
+    fish: {
+        name: 'fish',
+        display: 'Angry Fish',
+        health: 1000,
+        attacks: [
+            {
+                display: "Bite",
+                damage: 10
+            }
+        ]
+    },
+    flower: {
+        name: 'flower',
+        display: 'Man-Eating Flower',
+        health: 1100,
+        attacks: [
+            {
+                display: "Thorns",
+                damage: 20
+            }
+        ]
+    },
+    goo: {
+        name: 'goo',
+        display: 'Disgustingly, Terrifying Pile of Goo',
+        health: 2500,
+        attacks: [
+            {
+                display: "Consume",
+                damage: 18
+            }
+        ]
+    },
+    medium_domino: {
+        name: 'medium_domino',
+        display: 'Teenage Domino',
+        health: 1600,
+        attacks: [
+            {
+                display: "Grounded",
+                damage: -5
+            },
+            {
+                display: "Disobedience",
+                damage: 12
+            }
+        ]
+    },
+    shark: {
+        name: 'shark',
+        display: 'Great White Shark',
+        health: 1300,
+        attacks: [
+            {
+                display: "Chomp",
+                damage: 12
+            },
+            {
+                display: "Thrash",
+                    damage: 20
+            }
+        ]
+    },
+    small_domino: {
+        name: 'small_domino',
+        display: 'Baby Domino',
+        health: 2750,
+        attacks: [
+            {
+                display: "Baby",
+                damage: -1
+            },
+            {
+                display: "Cry",
+                damage: 4
+            }
+        ]
+    },
     spider: {
         name: 'spider',
         display: 'Spider',
         health: 1000,
-        attacks: {
-            web: {
+        attacks: [
+            {
                 display: "Shoot Web",
-                damage: 10
+                damage: 8
             }
-        }
+        ]
     },
-    alien: {
-        name: 'alien',
-        display: 'Alien',
-        health: 1500,
-        attacks: {
-            spit: {
-                display: "Spit",
-                damage: 9
+    sword: {
+        name: 'sword',
+        display: 'Curious, Prodding Sword',
+        health: 900,
+        attacks: [
+            {
+                display: "Stab",
+                damage: 30
             }
-        }
+        ]
+    },
+    tree: {
+        name: 'tree',
+        display: '',
+        health: 1750,
+        attacks: [
+            {
+                display: "Timber",
+                damage: 25
+            },
+            {
+                display: "Stomp",
+                damage: 20
+            }
+        ]
     },
     worm: {
         name: 'worm',
-        display: 'Worm',
-        health: 700,
-        attacks: {
-            worm: {
+        display: 'Highly Intelligent Worm',
+        health: 800,
+        attacks: [
+            {
                 display: "Worm",
                 damage: 0
             },
-            death_beam: {
-                display: "Laser",
-                damage: 20
+            {
+                display: "Death Ray",
+                damage: 15
             }
-        }
-    },
-    small_domino: {
-        name: 'small_domino',
-        display: 'Domino Baby',
-        health: 1800,
-        attacks: {
-            cuteness: {
-                display: "Baby",
-                damage: -1
-            },
-            cry: {
-                display: "Cry",
-                damage: 10
-            }
-        }
-    },
-    medium_domino: {
-        name: 'medium_domino',
-        display: 'Domino Apprentice',
-        health: 1800,
-        attacks: {
-            cuteness: {
-                display: "Baby",
-                damage: -1
-            },
-            cry: {
-                display: "Cry",
-                damage: 10
-            }
-        }
-    },
-    papa_domino: {
-        name: 'papa-domino',
-        display: 'Papa Domino',
-        health: 1800,
-        attacks: {
-            cuteness: {
-                display: "Baby",
-                damage: -1
-            },
-            cry: {
-                display: "Cry",
-                damage: 10
-            }
-        }
+        ]
     }
-
 };
 
 const progress = [
     {
-        required: 10,
+        required: 5,
         background: [
             'windows',
-            'cave'
         ],
         enemies: [
            monsters.spider,
-           monsters.alien
         ],
-        healthMultiplier: 1
+        healthMultiplier: .5
+    },
+    {
+        required: 10,
+        background: [
+            'cave'
+        ],
+        enemies: [
+            monsters.spider,
+            monsters.alien
+        ],
+        healthMultiplier: .75
     },
     {
         required: 1,
@@ -112,21 +220,85 @@ const progress = [
             'fire'
         ],
         enemies: [
-           monsters.small_domino
+            monsters.worm,
+            monsters.spider,
+            monsters.alien
         ],
-        healthMultiplier: 5
+        healthMultiplier: 1.25
     },
     {
-        required: 10,
+        required: 1,
         background: [
             'castle'
         ],
         enemies: [
-            monsters.worm,
-            monsters.alien,
-            monsters.spider
+            monsters.small_domino
         ],
         healthMultiplier: 2,
+    },
+    {
+        required: 1,
+        background: [
+            'castle'
+        ],
+        enemies: [
+            monsters.medium_domino
+        ],
+        healthMultiplier: 2,
+    },
+    {
+        required: 1,
+        background: [
+            'castle'
+        ],
+        enemies: [
+            monsters.beefcake_domino
+        ],
+        healthMultiplier: 2,
+    },
+    {
+        required: 10,
+        background: [
+            'ocean'
+        ],
+        enemies: [
+            monsters.fish,
+            monsters.shark
+        ],
+        healthMultiplier: 2.5
+    },
+    {
+        required: 10,
+        background: [
+            'meadow'
+        ],
+        enemies: [
+            monsters.flower,
+            monsters.tree
+        ],
+        healthMultiplier: 3
+    },
+    {
+        required: 10,
+        background: [
+            'dungeon'
+        ],
+        enemies: [
+            monsters.sword,
+            monsters.brain
+        ],
+        healthMultiplier: 3.5
+    },
+    {
+        required: 10,
+        background: [
+            'underworld
+        ],
+        enemies: [
+            monsters.goo,
+            monsters.creep
+        ],
+        healthMultiplier: 4
     }
 ];
 
