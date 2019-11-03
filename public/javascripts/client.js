@@ -37,7 +37,14 @@ let skills = new Vue({
     data: {
         list: [],
     }
-})
+});
+
+let upgrades = new Vue({
+    el: '#upgrades',
+    data: {
+        purchases: [],
+    }
+});
 
 $('#attack').click(function () {
     $.getJSON( "/game/attack", function( data ) {});
@@ -47,11 +54,11 @@ ws.onmessage = function (event) {
   let json = JSON.parse(event.data);
   console.log(json);
   if (json.type === "update") {
-      wsUpdate(json.monster, json.players, json.scene, json.skills);
+      wsUpdate(json.monster, json.players, json.scene, json.skills, json.upgrades);
   }
 };
 
-function wsUpdate(jsMon, jsPlayers, jsScene, jsSkills) {
+function wsUpdate(jsMon, jsPlayers, jsScene, jsSkills, jsUpgrades) {
     monster.name = jsMon.name;
     monster.display = jsMon.display;
     monster.health = jsMon.health;
@@ -76,6 +83,9 @@ function wsUpdate(jsMon, jsPlayers, jsScene, jsSkills) {
                         }
                     }
                 }
+            }
+            for (let i = 0; i < jsUpgrades.length; i++) {
+
             }
             console.log(jsPlayers[i]);
             jsPlayers.splice(i, 1);
