@@ -26,6 +26,13 @@ game.get('/skill/:name', function (req, res) {
 
             damage(runtime, player, req, skill.damage);
 
+            runtime.players.forEach(function (value) {
+                value.health -= skill.damage;
+                if (value.health > value.healthMax) {
+                    value.health = value.healthMax;
+                }
+            });
+
             req.app.get('wss').clients.forEach(function each(client) {
                 client.send(JSON.stringify({
                     type: "message",
