@@ -130,7 +130,7 @@ const progress = [
     }
 ];
 
-const skills  = [
+const skills = [
     {
         for: 'paladin',
         skills: [
@@ -191,6 +191,68 @@ const skills  = [
                 cooldown: 15,
                 damage: 45,
                 requiredLvl: 3
+            }
+        ]
+    }
+];
+
+const upgrades = [
+    {
+        for: 'Clicker Damage',
+        stats: [
+            {
+                amount: 0,
+                cost: 25
+            }
+        ]
+    },
+    {
+        for: 'Spell Effectiveness',
+        stats: [
+            {
+                amount: 0,
+                cost: 25,
+                multiplier: 1.25
+            }
+        ]
+    },
+    {
+        for: 'Clicker Minion',
+        stats: [
+            {
+                amount: 0,
+                cost: 25,
+                damage: 1
+            }
+        ]
+    },
+    {
+        for: 'Clicker Apprentice',
+        stats: [
+            {
+                amount: 0,
+                cost: 50,
+                damage: 2
+            }
+        ]
+    },
+    {
+        for: 'Clicker Master',
+        stats: [
+            {
+                amount: 0,
+                cost: 200,
+                damage: 5
+            }
+        ]
+    },
+    {
+        for: 'Clicker Kanye',
+        stats: [
+            {
+                amount: 0,
+                cost: 1000,
+                damage: 25
             }
         ]
     }
@@ -323,7 +385,7 @@ class Runtime {
         };
 
         this.players.push(player);
-        res.cookie('id', player.id);
+        res.cookie('id',  player.id, { maxAge: Number(new Date().getTime()/1000) + 60*60*24*30 });
         console.log("NOTICE: Connected " + player.name);
 
         return player;
