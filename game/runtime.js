@@ -381,7 +381,8 @@ class Runtime {
             clicks: 0,
             type: type,
             xp: 0,
-            xpreq: 200
+            xpreq: 200,
+            clickMult: type === 'mage' ? 0.5 : type === 'paladin' ? 1.0 : 1.5
         };
 
         this.players.push(player);

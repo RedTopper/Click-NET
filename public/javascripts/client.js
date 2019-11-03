@@ -10,7 +10,8 @@ let player = new Vue({
         xp: 0,
         xpreq: 200,
         id: "Loading...",
-        players: []
+        players: [],
+        clickMult: 0
     }
 });
 
@@ -69,7 +70,7 @@ function wsUpdate(jsMon, jsPlayers, jsScene, jsSkills) {
             player.xpreq = jsPlayers[i].xpreq;
             for (let i = 0; i < jsSkills.length; i++) {
                 if (jsSkills[i].for === player.type) {
-                    skills.list = []
+                    skills.list = [];
                     for (let j=0; j<jsSkills[i].skills.length; j++) {
                         if (jsSkills[i].skills[j].requiredLvl <= player.level) {
                             skills.list.push(jsSkills[i].skills[j]);

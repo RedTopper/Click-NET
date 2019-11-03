@@ -6,7 +6,7 @@ game.get('/attack', function(req, res) {
     let player = runtime.get(req.cookies['id']);
     if (!player) return;
 
-    runtime.monster.health -= 10 * player.level;
+    runtime.monster.health -= 10 * player.level * player.clickMult;
     if (runtime.monster.health <= 0) {
         player.xp += (runtime.monster.healthMax / 10);
         while (player.xp >= player.xpreq) {
