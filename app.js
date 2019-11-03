@@ -115,6 +115,7 @@ function attack() {
 
 (function loop() {
     let rand = Math.round(Math.random() * 5000) + 5000;
+    rand = rand / (runtime.players.length - 1 < 1 ? 1 : runtime.players.length);
     setTimeout(function() {
         attack();
         loop();
