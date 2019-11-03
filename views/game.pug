@@ -17,9 +17,9 @@ block content
                     img.card-img-top.background-scene(v-bind:src="'/images/backgrounds/' + background + '.png'" alt="Unknown")
                     .card-body
                         h5.card-title {{ display }}
-                        p.card-text HP: {{ health }} / {{ max }}
+                        p.card-text HP: {{ health }} / {{ healthMax }}
                         .progress
-                            .progress-bar.progress-bar-striped.progress-bar-animated(role="progressbar" v-bind:style='"width: " + (health/max)*100 + "%"')
+                            .progress-bar.progress-bar-striped.progress-bar-animated(role="progressbar" v-bind:style='"width: " + (health/healthMax)*100 + "%"')
 
             .col-sm-4.p-1
                 #player.card
@@ -31,7 +31,7 @@ block content
                         p.card-text Clicks: {{ clicks }}
                         small.card-text ID: {{ id }}
                     .ul.list-group.list-group-flush
-                        li.list-group-item(v-for="p in players") {{ p.name }} the {{ p.type }}
+                        li.list-group-item.no-hover(v-for="p in players") {{ p.name }} the {{ p.type }}
         .row
             .col-sm-4.p-1
                 .card
@@ -41,12 +41,10 @@ block content
                         a.list-group-item Test2
                         a.list-group-item Test3
             .col-sm-4.p-1
-                .card
+                #stats.card
                     h5.card-header Combat Info
-                    .list-group.list-group-flush
-                        a.list-group-item(href="?") Team DPS
-                        a.list-group-item(href="?") Team Total HP
-                        a.list-group-item(href="?") Test3
+                    .card-body
+                        p.card-text Team DPS: {{ dps }}
 
         .row
             .col-sm-10.p-1

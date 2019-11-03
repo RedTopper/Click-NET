@@ -59,13 +59,44 @@ const monsters = {
                 damage: 10
             }
         }
+    },
+    medium_domino: {
+        name: 'medium_domino',
+        display: 'Domino Apprentice',
+        health: 1800,
+        attacks: {
+            cuteness: {
+                display: "Baby",
+                damage: -1
+            },
+            cry: {
+                display: "Cry",
+                damage: 10
+            }
+        }
+    },
+    papa_domino: {
+        name: 'papa-domino',
+        display: 'Papa Domino',
+        health: 1800,
+        attacks: {
+            cuteness: {
+                display: "Baby",
+                damage: -1
+            },
+            cry: {
+                display: "Cry",
+                damage: 10
+            }
+        }
     }
+
 };
 
 const progress = [
     {
         required: 10,
-        backgrounds: [
+        background: [
             'windows',
             'cave'
         ],
@@ -168,10 +199,29 @@ class Runtime {
             }
 
             let json = JSON.parse(data);
-            console.log(json);
             runtime.load(json);
             console.log("Loaded!");
         });
+    }
+
+    nextMonReal() {
+        this.killsTotal++;
+        this.killsStage++;
+        let stage = progress[this.stage];
+        if (this.killsStage >= stage.required) {
+            this.stage++;
+            if (this.stage >= progress.length) this.stage = progress.length - 1;
+            this.killsStage = 0;
+            stage = progress[this.stage];
+        }
+
+        let mon = stage.enemies[Math.floor(Math.random() * stage.enemies.length)];
+        mon = JSON.parse(JSON.stringify(mon));
+        mon.healthMax = (Math.random() + 0.5) * mon.health * stage.healthMultiplier;
+        mon.healthMax = Math.floor(mon.healthMax / 10) * 10;
+        mon.health = mon.healthMax;
+        this.scene.background = stage.background[Math.floor(Math.random() * stage.background.length)];
+        this.monster = mon;
     }
 
     defaults() {
@@ -183,7 +233,9 @@ class Runtime {
         this.skills = skills;
         this.scene = {
             background: 'windows'
-        }
+        };
+
+        this.nextMonReal();
     }
 
     load(json) {

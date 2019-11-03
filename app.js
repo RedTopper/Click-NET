@@ -64,4 +64,12 @@ setInterval(function () {
     })
 }, 500);
 
+setInterval(function () {
+    if(runtime.monster.lasthp === undefined){
+        runtime.monster.lasthp = runtime.monster.health;
+    }
+    runtime.monster.dps = runtime.monster.lasthp - runtime.monster.health;
+    runtime.monster.lasthp = runtime.monster.health;
+}, 1000);
+
 module.exports = app;
