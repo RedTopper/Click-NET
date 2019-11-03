@@ -33,7 +33,7 @@ block content
                         p.card-text Clicks: {{ clicks }}
                         small.card-text ID: {{ id }}
                     .ul.list-group.list-group-flush
-                        li.list-group-item(v-for="p in players") {{ p.name }} the {{ p.type }}
+                        li.list-group-item.no-hover(v-for="p in players") {{ p.name }} the {{ p.type }}
         .row
             .col-sm-4.p-1
                 .card

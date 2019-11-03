@@ -54,3 +54,7 @@ body, html {
 .monster-scene {
     z-index: 1;
 }
+
+.list-group-item.no-hover:hover {
+    background-color: #32383e;
+}
