@@ -4,18 +4,21 @@ const game = express.Router();
 game.get('/attack', function(req, res) {
     let runtime = req.app.get('runtime');
     let player = runtime.get(req.cookies['id']);
+    let players = runtime.players;
+    console.log(players);
     if (!player) return;
 
     runtime.monster.health -= 1000 * player.level * player.clickMult;
     if (runtime.monster.health <= 0) {
-        player.xp += (runtime.monster.healthMax / 10);
-        while (player.xp >= player.xpreq) {
-            console.log("here");
-            player.xp -= player.xpreq;
-            player.xpreq *= 1.5;
-            player.level++;
-        }
-        runtime.nextMonReal();
+        players.forEach(function(p) {
+            p.xp += ((runtime.monster.healthMax / 10) * (p.id === player.id ? 1.0 : 0.5));
+            while (p.xp >= p.xpreq) {
+                p.xp -= p.xpreq;
+                p.xpreq *= 1.5;
+                p.level++;
+            }
+            runtime.nextMonReal();
+        });
     }
     player.clicks++;
     res.type("application/json");
