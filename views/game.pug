@@ -32,8 +32,8 @@ block content
                         p.card-text Level: {{ level }}
                         p.card-text Clicks: {{ clicks }}
                         small.card-text ID: {{ id }}
-                    #players.ul.list-group.list-group-flush
-                        li.list-group-item(v-for="p in players") {p}
+                    .ul.list-group.list-group-flush
+                        li.list-group-item(v-for="p in players") {{ p.name }} the {{ p.type }}
         .row
             .col-sm-4.p-1
                 .card

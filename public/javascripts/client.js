@@ -7,22 +7,8 @@ let player = new Vue({
         name: '',
         level: 0,
         clicks: 0,
-        id: "Loading..."
-    }
-});
-
-let players = new Vue({
-    el: "#players",
-    data: {
-        at: [
-            {
-                type: 'unknown',
-                name: '',
-                level: 0,
-                clicks: 0,
-                id: "Loading..."
-            }
-        ]
+        id: "Loading...",
+        players: []
     }
 });
 
@@ -57,22 +43,19 @@ function wsUpdate(jsMon, jsPlayers, jsScene) {
     monster.display = jsMon.display;
     monster.health = jsMon.health;
     monster.background = jsScene.background;
-
+    player.players = jsPlayers;
     jsPlayers.forEach(function(jsplayer) {
-        if (jsplayer.id === document.cookie.substring(3)) {
+        if (jsplayer.id === getCookie('id')) {
             player.clicks = jsplayer.clicks;
             player.level = jsplayer.level;
             player.name = jsplayer.name;
             player.type = jsplayer.type;
             player.id = jsplayer.id;
-        } else {
-            players.at[jsplayer.id] = {
-                type: jsplayer.type,
-                name: jsplayer.name,
-                level: jsplayer.level,
-                clicks: jsplayer.clicks,
-                id: jsplayer.id
-            }
         }
     });
+}
+
+function getCookie(name) {
+    let match = document.cookie.match(new RegExp('(^| )' + name + '=([^;]+)'));
+    if (match) return match[2];
 }

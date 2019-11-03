@@ -52,7 +52,6 @@ setInterval(function () {
 
 setInterval(function () {
     wss.clients.forEach(function (socket) {
-        console.log(runtime);
         socket.send(
             JSON.stringify({
                 type: 'update',
