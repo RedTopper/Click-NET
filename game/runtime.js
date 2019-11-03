@@ -130,7 +130,7 @@ const progress = [
     }
 ];
 
-const skills  = [
+const skills = [
     {
         for: 'paladin',
         skills: [
@@ -138,11 +138,13 @@ const skills  = [
                 name: 'Pummel',
                 cooldown: 0,
                 damage: 2,
+                requiredLvl: 1
             },
             {
                 name: 'Protect',
                 cooldown: 20,
                 damage: 0,
+                requiredLvl: 2
             },
         ]
     },
@@ -152,12 +154,14 @@ const skills  = [
             {
                 name: 'Slash',
                 cooldown: 0,
-                damage: 2
+                damage: 2,
+                requiredLvl: 1
             },
             {
                 name: 'Cleave',
                 cooldown: 15,
-                damage: 70
+                damage: 70,
+                requiredLvl: 3
             }
         ]
     },
@@ -167,22 +171,89 @@ const skills  = [
             {
                 name: 'Lightning Bolt',
                 cooldown: 0,
-                damage: 1
+                damage: 1,
+                requiredLvl: 1
             },
             {
                 name: 'Heal',
                 cooldown: 10,
-                damage: -10
+                damage: -10,
+                requiredLvl: 1
             },
             {
                 name: 'Fireball',
                 cooldown: 20,
-                damage: 50
+                damage: 50,
+                requiredLvl: 2
             },
             {
                 name: 'Tornado',
                 cooldown: 15,
-                damage: 45
+                damage: 45,
+                requiredLvl: 3
+            }
+        ]
+    }
+];
+
+const upgrades = [
+    {
+        for: 'Clicker Damage',
+        stats: [
+            {
+                amount: 0,
+                cost: 25,
+                multiplier: 1.1
+            }
+        ]
+    },
+    {
+        for: 'Spell Effectiveness',
+        stats: [
+            {
+                amount: 0,
+                cost: 50,
+                multiplier: 1.25
+            }
+        ]
+    },
+    {
+        for: 'Clicker Minion',
+        stats: [
+            {
+                amount: 0,
+                cost: 50,
+                damage: 1
+            }
+        ]
+    },
+    {
+        for: 'Clicker Apprentice',
+        stats: [
+            {
+                amount: 0,
+                cost: 100,
+                damage: 2
+            }
+        ]
+    },
+    {
+        for: 'Clicker Master',
+        stats: [
+            {
+                amount: 0,
+                cost: 400,
+                damage: 5
+            }
+        ]
+    },
+    {
+        for: 'Clicker Kanye',
+        stats: [
+            {
+                amount: 0,
+                cost: 2000,
+                damage: 25
             }
         ]
     }
@@ -311,11 +382,12 @@ class Runtime {
             clicks: 0,
             type: type,
             xp: 0,
-            xpreq: 200
+            xpreq: 200,
+            clickMult: type === 'mage' ? 0.5 : type === 'paladin' ? 1.0 : 1.5
         };
 
         this.players.push(player);
-        res.cookie('id', player.id);
+        res.cookie('id',  player.id, { maxAge: Number(new Date().getTime()/1000) + 60*60*24*30 });
         console.log("NOTICE: Connected " + player.name);
 
         return player;
