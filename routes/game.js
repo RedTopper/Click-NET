@@ -48,6 +48,12 @@ function damage(runtime, player, req, damage) {
     runtime.monster.health -= damage;
 
     if (runtime.monster.health <= 0) {
+        req.app.get('wss').clients.forEach(function each(client) {
+            client.send(JSON.stringify({
+                type: "message",
+                message: player.name + " has killed the " + runtime.monster.display + "!"
+            }));
+        });
         players.forEach(function(p) {
             p.xp += ((runtime.monster.healthMax / 10) * (p.id === player.id ? 1.0 : 0.5));
             while (p.xp >= p.xpreq) {
@@ -56,12 +62,6 @@ function damage(runtime, player, req, damage) {
                 p.level++;
             }
             runtime.nextMonReal();
-        });
-        req.app.get('wss').clients.forEach(function each(client) {
-            client.send(JSON.stringify({
-                type: "message",
-                message: player.name + " has killed the " + runtime.monster.name + "!"
-            }));
         })
     }
 }
