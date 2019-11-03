@@ -6,7 +6,7 @@ game.get('/attack', function(req, res) {
     let player = runtime.get(req.cookies['id']);
     if (!player) return;
 
-    damage(runtime, player, req,1000 * player.level * player.clickMult);
+    damage(runtime, player, req, 1000 * player.clickMult);
 
     player.clicks++;
     res.type("application/json");
@@ -45,7 +45,7 @@ game.get('/skill/:name', function (req, res) {
 
 function damage(runtime, player, req, damage) {
     let players = runtime.players;
-    runtime.monster.health -= damage;
+    runtime.monster.health -= damage * player.level;
 
     if (runtime.monster.health <= 0) {
         req.app.get('wss').clients.forEach(function each(client) {
