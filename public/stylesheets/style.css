@@ -68,6 +68,7 @@ body, html {
 
 .monster-scene {
     z-index: 1;
+	position: relative;
 }
 
 .list-group-item.no-hover:hover {

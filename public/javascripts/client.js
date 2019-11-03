@@ -47,7 +47,10 @@ let skills = new Vue({
 let log = new Vue({
     el: '#log',
     data: {
-        messages: []
+        messages: [
+            'This is the start of the log history.',
+            'Welcome to Click-NET'
+        ]
     }
 });
 
