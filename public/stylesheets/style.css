@@ -68,6 +68,11 @@ body, html {
 
 .monster-scene {
     z-index: 1;
+	position: relative;
+}
+
+#log {
+	min-height: 300px;
 }
 
 .list-group-item.no-hover:hover {
