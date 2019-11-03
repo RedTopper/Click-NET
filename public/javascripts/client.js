@@ -28,7 +28,11 @@ let monster = new Vue({
 let stats = new Vue({
     el: '#stats',
     data: {
-        dps: 0
+        dps: 0,
+        stage: 0,
+        killsStage: 0,
+        killsTotal: 0,
+        stageKills: 0
     }
 });
 
@@ -37,7 +41,7 @@ let skills = new Vue({
     data: {
         list: [],
     }
-})
+});
 
 $('#attack').click(function () {
     $.getJSON( "/game/attack", function( data ) {});
@@ -47,17 +51,21 @@ ws.onmessage = function (event) {
   let json = JSON.parse(event.data);
   console.log(json);
   if (json.type === "update") {
-      wsUpdate(json.monster, json.players, json.scene, json.skills);
+      wsUpdate(json.monster, json.players, json.scene, json.skills, json.stage, json.killsStage, json.killsTotal, json.stageKills);
   }
 };
 
-function wsUpdate(jsMon, jsPlayers, jsScene, jsSkills) {
+function wsUpdate(jsMon, jsPlayers, jsScene, jsSkills, jsStage, jsKillsStage, jsKillsTotal, jsStageKills) {
     monster.name = jsMon.name;
     monster.display = jsMon.display;
     monster.health = jsMon.health;
     monster.healthMax = jsMon.healthMax;
     monster.background = jsScene.background;
     stats.dps = jsMon.dps;
+    stats.stage = jsStage + 1;
+    stats.killsStage = jsKillsStage;
+    stats.killsTotal = jsKillsTotal;
+    stats.stageKills = jsStageKills;
     for (let i=0; i<jsPlayers.length; i++) {
         if (jsPlayers[i].id === getCookie('id')) {
             player.clicks = jsPlayers[i].clicks;

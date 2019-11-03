@@ -320,6 +320,11 @@ class Runtime {
 
         return player;
     }
+
+    getStageKills(){
+        return progress[this.stage].required;
+    }
+
 }
 
 module.exports = Runtime;

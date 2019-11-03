@@ -51,6 +51,7 @@ setInterval(function () {
 }, 5000);
 
 setInterval(function () {
+    let StageKills = runtime.getStageKills();
     wss.clients.forEach(function (socket) {
         socket.send(
             JSON.stringify({
@@ -58,7 +59,11 @@ setInterval(function () {
                 monster: runtime.monster,
                 players: runtime.players,
                 scene: runtime.scene,
-                skills: runtime.skills
+                skills: runtime.skills,
+                stage: runtime.stage,
+                killsStage: runtime.killsStage,
+                killsTotal: runtime.killsTotal,
+                stageKills: StageKills
             })
         );
     })
