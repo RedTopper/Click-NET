@@ -6,7 +6,11 @@ game.get('/attack', function(req, res) {
     console.log(runtime.get(req.cookies['id']));
     let player = runtime.get(req.cookies['id']);
     if (!player) return;
-    runtime.monster.health -= 1;
+    console.log(runtime);
+    runtime.monster.health -= 100;
+    if (runtime.monster.health <= 0) {
+        runtime.nextMon();
+    }
     player.clicks++;
     res.type("application/json");
     res.end(JSON.stringify({some: "thing"}));

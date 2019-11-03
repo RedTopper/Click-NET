@@ -59,7 +59,38 @@ const monsters = {
                 damage: 10
             }
         }
+    },
+    medium_domino: {
+        name: 'medium_domino',
+        display: 'Domino Apprentice',
+        health: 1800,
+        attacks: {
+            cuteness: {
+                display: "Baby",
+                damage: -1
+            },
+            cry: {
+                display: "Cry",
+                damage: 10
+            }
+        }
+    },
+    papa_domino: {
+        name: 'papa-domino',
+        display: 'Papa Domino',
+        health: 1800,
+        attacks: {
+            cuteness: {
+                display: "Baby",
+                damage: -1
+            },
+            cry: {
+                display: "Cry",
+                damage: 10
+            }
+        }
     }
+
 };
 
 const progress = [
@@ -175,6 +206,26 @@ class Runtime {
             runtime.load(json);
             console.log("Loaded!");
         });
+    }
+
+    nextMon() {
+        this.killsTotal++;
+        //supa dupa ternupas
+        if (++this.killsStage >= 5) {
+            this.monster.background = monster.background === 'bliss' ? 'cave' :
+                this.monster.background === 'cave' ? 'fire' :
+                    this.monster.background === 'fire' ? 'castle' : 'bliss';
+            this.killsStage = 0;
+        }
+
+        if (this.killsStage === 4) {
+            this.monster = (this.killsTotal > 10) ? monsters.papa_domino :
+                (this.killsTotal > 5) ? monsters.medium_domino : monsters.small_domino;
+        }
+        else {
+            let mons = [monsters.alien, monsters.spider, monsters.worm];
+            this.monster = mons[Math.floor(Math.random()*mons.length)];
+        }
     }
 
     defaults() {
