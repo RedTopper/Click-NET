@@ -56,7 +56,7 @@ const monsters = {
         attacks: [
             {
                 display: "Death's Kiss",
-                damage: 35
+                damage: 50
             }
         ]
     },

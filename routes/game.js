@@ -6,8 +6,7 @@ game.get('/attack', function(req, res) {
     let player = runtime.get(req.cookies['id']);
     if (!player) return;
 
-    damage(runtime, player, req, 1000 * player.clickMult);
-    damage(runtime, player, req,10 * player.level * player.clickMult);
+    damage(runtime, player, req, 10 * player.clickMult);
 
     player.clicks++;
     res.type("application/json");
