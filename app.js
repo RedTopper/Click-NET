@@ -72,8 +72,17 @@ setInterval(function () {
     if(runtime.monster.lasthp === undefined){
         runtime.monster.lasthp = runtime.monster.health;
     }
+
     runtime.monster.dps = runtime.monster.lasthp - runtime.monster.health;
     runtime.monster.lasthp = runtime.monster.health;
+
+    runtime.players.forEach(function (value) {
+        value.skills.forEach(function (skill) {
+            if (skill.timer > 0) {
+                skill.timer -= 1;
+            }
+        })
+    })
 }, 1000);
 
 module.exports = app;

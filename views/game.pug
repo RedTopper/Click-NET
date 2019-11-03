@@ -11,7 +11,8 @@ block content
                     #skills.card
                         h5.card-header Spells
                         .list-group.list-group-flush
-                            a.list-group-item(v-for="s in list") {{ s.name }}
+                            a.list-group-item(v-for="s in list" v-bind:onclick="'skill(\"' + s.name + '\")'") {{ s.display }}
+                                span(v-if="s.timer !== 0")  ({{ s.timer }})
                 .col-sm-4.p-1
                     #monster.card
                         img#attack.card-img-top.monster-scene(v-bind:src="'/images/bad/' + name + '.png'" alt="Unknown")
@@ -40,9 +41,7 @@ block content
                     .card
                         h5.card-header Upgrades
                         .list-group.list-group-flush
-                            a.list-group-item Test
-                            a.list-group-item Test2
-                            a.list-group-item Test3
+                            a.list-group-item(v-for="s in list") {{ s.name }}
                 .col-sm-4.p-1
                     #stats.card
                         h5.card-header Combat Info
@@ -56,10 +55,7 @@ block content
                         h5.card-header Log
                         .card-body
                             p.card-text(v-for="m in messages") {{ m }}
-
-            .row
-                .col-sm-2.p-1
-                    a.btn.btn-primary.align-right(href="/quit") Quit Game
+            a.btn.btn-danger.btn-block.col-4.mt-5.mb-5.mr-auto.ml-auto(href="/quit") Abandon Game
 
 
             script(src="/libraries/vue.js")
