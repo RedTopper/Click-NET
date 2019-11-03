@@ -46,6 +46,7 @@ let skills = new Vue({
 
 $('#attack').click(function () {
     $.getJSON( "/game/attack", function( data ) {});
+    $(this).effect('shake', 'fast', 2);
 });
 
 ws.onmessage = function (event) {
