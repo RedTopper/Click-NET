@@ -1,59 +1,60 @@
 extends layout
 
 block content
-    div.container
-        .row
-            .col-sm-12.p-1
-                h1.display-1.titlefont.text-center Click-NET
-        .row
-            .col-sm-4.p-1
-                #skills.card
-                    h5.card-header Spells
-                    .list-group.list-group-flush
-                        a.list-group-item(v-for="s in list") {{ s.name }}
-            .col-sm-4.p-1
-                #monster.card
-                    img#attack.card-img-top.monster-scene(v-bind:src="'/images/bad/' + name + '.png'" alt="Unknown")
-                    img.card-img-top.background-scene(v-bind:src="'/images/backgrounds/' + background + '.png'" alt="Unknown")
-                    .card-body
-                        h5.card-title {{ display }}
-                        p.card-text HP: {{ health }} / {{ healthMax }}
-                        .progress
-                            .progress-bar.progress-bar-striped.progress-bar-animated(role="progressbar" v-bind:style='"width: " + (health/healthMax)*100 + "%"')
+    .p-5.bg2
+        div.container
+            .row
+                .col-sm-12.p-1
+                    h1.display-1.titlefont.text-center Click-NET
+            .row
+                .col-sm-4.p-1
+                    #skills.card
+                        h5.card-header Spells
+                        .list-group.list-group-flush
+                            a.list-group-item(v-for="s in list") {{ s.name }}
+                .col-sm-4.p-1
+                    #monster.card
+                        img#attack.card-img-top.monster-scene(v-bind:src="'/images/bad/' + name + '.png'" alt="Unknown")
+                        img.card-img-top.background-scene(v-bind:src="'/images/backgrounds/' + background + '.png'" alt="Unknown")
+                        .card-body
+                            h5.card-title {{ display }}
+                            p.card-text HP: {{ health }} / {{ healthMax }}
+                            .progress
+                                .progress-bar.progress-bar-striped.progress-bar-animated(role="progressbar" v-bind:style='"width: " + (health/healthMax)*100 + "%"')
 
-            .col-sm-4.p-1
-                #player.card
-                    img.card-img-top(v-bind:src="'/images/player/' + type + '.png'"  alt='Unknown')
-                    .card-body
-                        h3.card-title {{ name }}
-                            small  the {{ type }}
-                        p.card-text Level: {{ level }}
-                        p.card-text Clicks: {{ clicks }}
-                        small.card-text ID: {{ id }}
-                    .ul.list-group.list-group-flush
-                        li.list-group-item.no-hover(v-for="p in players") {{ p.name }} the {{ p.type }}
-        .row
-            .col-sm-4.p-1
-                .card
-                    h5.card-header Upgrades
-                    .list-group.list-group-flush
-                        a.list-group-item Test
-                        a.list-group-item Test2
-                        a.list-group-item Test3
-            .col-sm-4.p-1
-                #stats.card
-                    h5.card-header Combat Info
-                    .card-body
-                        p.card-text Team DPS: {{ dps }}
+                .col-sm-4.p-1
+                    #player.card
+                        img.card-img-top(v-bind:src="'/images/player/' + type + '.png'"  alt='Unknown')
+                        .card-body
+                            h3.card-title {{ name }}
+                                small  the {{ type }}
+                            p.card-text Level: {{ level }}
+                            p.card-text Clicks: {{ clicks }}
+                            small.card-text ID: {{ id }}
+                        .ul.list-group.list-group-flush
+                            li.list-group-item.no-hover(v-for="p in players") {{ p.name }} the {{ p.type }}
+            .row
+                .col-sm-4.p-1
+                    .card
+                        h5.card-header Upgrades
+                        .list-group.list-group-flush
+                            a.list-group-item Test
+                            a.list-group-item Test2
+                            a.list-group-item Test3
+                .col-sm-4.p-1
+                    #stats.card
+                        h5.card-header Combat Info
+                        .card-body
+                            p.card-text Team DPS: {{ dps }}
 
-        .row
-            .col-sm-10.p-1
-                .card
-                    h5.card-header Log
-                    p.p-2.card-text.overflow-auto Testserserserasdf
-            .col-sm-2.p-1
-                a.btn.btn-primary.align-right(href="/quit") Leave Game
+            .row
+                .col-sm-10.p-1
+                    .card
+                        h5.card-header Log
+                        p.p-2.card-text.overflow-auto Testserserserasdf
+                .col-sm-2.p-1
+                    a.btn.btn-primary.align-right(href="/quit") Leave Game
 
 
-        script(src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js")
-        script(src="javascripts/client.js")
+            script(src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js")
+            script(src="javascripts/client.js")
