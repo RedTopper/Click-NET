@@ -52,7 +52,7 @@ const monsters = {
     creep: {
         name: 'creep',
         display: 'Creeper',
-        health: 500,
+        health: 1000,
         attacks: [
             {
                 display: "Death's Kiss",
@@ -126,7 +126,7 @@ const monsters = {
     small_domino: {
         name: 'small_domino',
         display: 'Baby Domino',
-        health: 2750,
+        health: 4000,
         attacks: [
             {
                 display: "Baby",
@@ -162,7 +162,7 @@ const monsters = {
     },
     tree: {
         name: 'tree',
-        display: '',
+        display: 'Walking War Tree',
         health: 1750,
         attacks: [
             {
