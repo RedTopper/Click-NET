@@ -14,6 +14,7 @@ let player = new Vue({
         clickMult: 0,
         health: 100,
         healthMax: 100,
+        locked: true
     }
 });
 

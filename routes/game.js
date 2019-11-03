@@ -70,6 +70,7 @@ function damage(runtime, player, req, damage) {
                 p.xpreq *= 1.5;
                 p.level++;
                 p.health += (20*p.level);
+                p.locked = p.level >= 10;
             }
             runtime.nextMonReal();
         })

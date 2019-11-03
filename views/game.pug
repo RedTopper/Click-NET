@@ -49,7 +49,7 @@ block content
                         li.list-group-item.no-hover(v-for="p in players") {{ p.name }} the {{ p.type }}
                 .card
                     .card-body
-                        a.btn.btn-info.btn-block.mr-auto.ml-auto(href="/win" class="disabled") Win Game
+                        button#win.btn.btn-info.btn-block.mr-auto.ml-auto(href="/win" disabled="player.locked") Win Game
                         a.btn.btn-danger.btn-block.mr-auto.ml-auto(href="/quit") Abandon Game
 
 

@@ -85,7 +85,6 @@ setInterval(function () {
     })
 }, 1000);
 
-
 function attack() {
     if (runtime.players.length === 0) return;
 
