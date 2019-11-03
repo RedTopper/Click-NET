@@ -138,11 +138,13 @@ const skills  = [
                 name: 'Pummel',
                 cooldown: 0,
                 damage: 2,
+                requiredLvl: 1
             },
             {
                 name: 'Protect',
                 cooldown: 20,
                 damage: 0,
+                requiredLvl: 2
             },
         ]
     },
@@ -152,12 +154,14 @@ const skills  = [
             {
                 name: 'Slash',
                 cooldown: 0,
-                damage: 2
+                damage: 2,
+                requiredLvl: 1
             },
             {
                 name: 'Cleave',
                 cooldown: 15,
-                damage: 70
+                damage: 70,
+                requiredLvl: 3
             }
         ]
     },
@@ -167,22 +171,26 @@ const skills  = [
             {
                 name: 'Lightning Bolt',
                 cooldown: 0,
-                damage: 1
+                damage: 1,
+                requiredLvl: 1
             },
             {
                 name: 'Heal',
                 cooldown: 10,
-                damage: -10
+                damage: -10,
+                requiredLvl: 1
             },
             {
                 name: 'Fireball',
                 cooldown: 20,
-                damage: 50
+                damage: 50,
+                requiredLvl: 2
             },
             {
                 name: 'Tornado',
                 cooldown: 15,
-                damage: 45
+                damage: 45,
+                requiredLvl: 3
             }
         ]
     }
