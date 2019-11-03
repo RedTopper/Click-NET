@@ -553,23 +553,29 @@ class Runtime {
             return undefined;
         }
 
-        let player = {
-            id: uuid(),
-            name: name.substring(0, 12),
-            level: 1,
-            clicks: 0,
-            type: type,
-            xp: 0,
-            xpreq: 200,
-            skills: JSON.parse(JSON.stringify(skills[type])),
-            clickMult: type === 'mage' ? 0.5 : type === 'paladin' ? 1.0 : 1.5
-        };
+        let player = this.create(uuid(), name, type);
 
         this.players.push(player);
         res.cookie('id',  player.id, { maxAge: Number(new Date().getTime()/1000) + 60*60*24*30 });
         console.log("NOTICE: Connected " + player.name);
 
         return player;
+    }
+
+    create(id, name, type) {
+        return {
+            id: id,
+            name: name.substring(0, 12),
+            level: 1,
+            clicks: 0,
+            type: type,
+            xp: 0,
+            health: 100,
+            healthMax: 100,
+            xpreq: 200,
+            skills: JSON.parse(JSON.stringify(skills[type])),
+            clickMult: type === 'mage' ? 0.5 : type === 'paladin' ? 1.0 : 1.5
+        };
     }
 
     getStageKills(){
