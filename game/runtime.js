@@ -12,85 +12,84 @@ const monsters = {
         name: 'spider',
         display: 'Spider',
         health: 1000,
-        attacks: {
-            web: {
+        attacks: [
+            {
                 display: "Shoot Web",
                 damage: 10
             }
-        }
+        ]
     },
     alien: {
         name: 'alien',
         display: 'Alien',
         health: 1500,
-        attacks: {
-            spit: {
+        attacks: [
+            {
                 display: "Spit",
                 damage: 9
             }
-        }
+        ]
     },
     worm: {
         name: 'worm',
         display: 'Worm',
         health: 700,
-        attacks: {
-            worm: {
+        attacks: [
+            {
                 display: "Worm",
                 damage: 0
             },
-            death_beam: {
+            {
                 display: "Laser",
                 damage: 20
             }
-        }
+        ]
     },
     small_domino: {
         name: 'small_domino',
         display: 'Domino Baby',
         health: 1800,
-        attacks: {
-            cuteness: {
+        attacks: [
+            {
                 display: "Baby",
                 damage: -1
             },
-            cry: {
+            {
                 display: "Cry",
                 damage: 10
             }
-        }
+        ]
     },
     medium_domino: {
         name: 'medium_domino',
         display: 'Domino Apprentice',
         health: 1800,
-        attacks: {
-            cuteness: {
+        attacks: [
+            {
                 display: "Baby",
                 damage: -1
             },
-            cry: {
+            {
                 display: "Cry",
                 damage: 10
             }
-        }
+        ]
     },
     papa_domino: {
         name: 'papa-domino',
         display: 'Papa Domino',
         health: 1800,
-        attacks: {
-            cuteness: {
+        attacks: [
+            {
                 display: "Baby",
                 damage: -1
             },
-            cry: {
+            {
                 display: "Cry",
                 damage: 10
             }
-        }
+        ]
     }
-
 };
 
 const progress = [
@@ -381,23 +380,29 @@ class Runtime {
             return undefined;
         }
 
-        let player = {
-            id: uuid(),
-            name: name.substring(0, 12),
-            level: 1,
-            clicks: 0,
-            type: type,
-            xp: 0,
-            xpreq: 200,
-            skills: JSON.parse(JSON.stringify(skills[type])),
-            clickMult: type === 'mage' ? 0.5 : type === 'paladin' ? 1.0 : 1.5
-        };
+        let player = this.create(uuid(), name, type);
 
         this.players.push(player);
         res.cookie('id',  player.id, { maxAge: Number(new Date().getTime()/1000) + 60*60*24*30 });
         console.log("NOTICE: Connected " + player.name);
 
         return player;
+    }
+
+    create(id, name, type) {
+        return {
+            id: id,
+            name: name.substring(0, 12),
+            level: 1,
+            clicks: 0,
+            type: type,
+            xp: 0,
+            health: 100,
+            healthMax: 100,
+            xpreq: 200,
+            skills: JSON.parse(JSON.stringify(skills[type])),
+            clickMult: type === 'mage' ? 0.5 : type === 'paladin' ? 1.0 : 1.5
+        };
     }
 
     getStageKills(){

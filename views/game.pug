@@ -34,6 +34,10 @@ block content
                             p.card-text XP {{ Math.round(xp) }} / {{ Math.round(xpreq) }}
                             .progress
                                 .progress-bar.bg-warning.progress-bar-animated(role="progressbar" v-bind:style='"width: " + (xp/xpreq)*100 + "%"')
+                            br
+                            p.card-text HP {{ Math.round(health) }} / {{ Math.round(healthMax) }}
+                            .progress
+                                .progress-bar.bg-success.progress-bar-animated(role="progressbar" v-bind:style='"width: " + (health/healthMax)*100 + "%"')
                         .ul.list-group.list-group-flush
                             li.list-group-item.no-hover(v-for="p in players") {{ p.name }} the {{ p.type }}
             .row
