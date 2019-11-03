@@ -292,7 +292,7 @@ const progress = [
     {
         required: 10,
         background: [
-            'underworld
+            'underworld'
         ],
         enemies: [
             monsters.goo,
