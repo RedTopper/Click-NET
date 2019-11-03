@@ -19,9 +19,9 @@ block content
                     img.card-img-top.background-scene(v-bind:src="'/images/backgrounds/' + background + '.png'" alt="Unknown")
                     .card-body
                         h5.card-title {{ display }}
-                        p.card-text HP: {{ health }} / {{ max }}
+                        p.card-text HP: {{ health }} / {{ healthMax }}
                         .progress
-                            .progress-bar.progress-bar-striped.progress-bar-animated(role="progressbar" v-bind:style='"width: " + (health/max)*100 + "%"')
+                            .progress-bar.progress-bar-striped.progress-bar-animated(role="progressbar" v-bind:style='"width: " + (health/healthMax)*100 + "%"')
 
             .col-sm-4.p-1
                 #player.card

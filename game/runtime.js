@@ -96,7 +96,7 @@ const monsters = {
 const progress = [
     {
         required: 10,
-        backgrounds: [
+        background: [
             'windows',
             'cave'
         ],
@@ -202,30 +202,29 @@ class Runtime {
             }
 
             let json = JSON.parse(data);
-            console.log(json);
             runtime.load(json);
             console.log("Loaded!");
         });
     }
 
-    nextMon() {
+    nextMonReal() {
         this.killsTotal++;
-        //supa dupa ternupas
-        if (++this.killsStage >= 5) {
-            this.monster.background = monster.background === 'bliss' ? 'cave' :
-                this.monster.background === 'cave' ? 'fire' :
-                    this.monster.background === 'fire' ? 'castle' : 'bliss';
+        this.killsStage++;
+        let stage = progress[this.stage];
+        if (this.killsStage >= stage.required) {
+            this.stage++;
+            if (this.stage >= progress.length) this.stage = progress.length - 1;
             this.killsStage = 0;
+            stage = progress[this.stage];
         }
 
-        if (this.killsStage === 4) {
-            this.monster = (this.killsTotal > 10) ? monsters.papa_domino :
-                (this.killsTotal > 5) ? monsters.medium_domino : monsters.small_domino;
-        }
-        else {
-            let mons = [monsters.alien, monsters.spider, monsters.worm];
-            this.monster = mons[Math.floor(Math.random()*mons.length)];
-        }
+        let mon = stage.enemies[Math.floor(Math.random() * stage.enemies.length)];
+        mon = JSON.parse(JSON.stringify(mon));
+        mon.healthMax = (Math.random() + 0.5) * mon.health * stage.healthMultiplier;
+        mon.healthMax = Math.floor(mon.healthMax / 10) * 10;
+        mon.health = mon.healthMax;
+        this.scene.background = stage.background[Math.floor(Math.random() * stage.background.length)];
+        this.monster = mon;
     }
 
     defaults() {
@@ -236,7 +235,9 @@ class Runtime {
         this.monster = monsters.spider;
         this.scene = {
             background: 'windows'
-        }
+        };
+
+        this.nextMonReal();
     }
 
     load(json) {

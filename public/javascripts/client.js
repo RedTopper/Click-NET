@@ -18,8 +18,8 @@ let monster = new Vue({
         background: 'unknown',
         name: 'unknown',
         display: 'the unknown',
-        health: 100,
-        max: 1000
+        health: 1,
+        healthMax: 1
     }
 });
 
@@ -49,6 +49,7 @@ function wsUpdate(jsMon, jsPlayers, jsScene) {
     monster.name = jsMon.name;
     monster.display = jsMon.display;
     monster.health = jsMon.health;
+    monster.healthMax = jsMon.healthMax;
     monster.background = jsScene.background;
     player.players = jsPlayers;
     stats.dps = jsMon.dps;
