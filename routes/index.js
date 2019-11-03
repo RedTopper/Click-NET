@@ -19,6 +19,13 @@ router.get('/quit', function (req, res) {
     res.redirect("/");
 });
 
+router.get('/win', function (req, res) {
+    let runtime = req.app.get('runtime');
+    runtime.quit(req.cookies['id']);
+    res.clearCookie('id');
+    res.render('win', { title: 'Click NET', runtime: runtime });
+});
+
 router.get('/game', join);
 router.post('/game', join);
 
