@@ -8,6 +8,136 @@ const types = [
 ];
 
 const monsters = {
+    alien: {
+        name: 'alien',
+        display: 'Probing Alien',
+        health: 1300,
+        attacks: [
+            {
+                display: "Spit",
+                damage: 7
+            }
+        ]
+    },
+    beefcake_domino: {
+        name: 'beefcake_domino',
+        display: 'Beefcake Domino',
+        health: 2000,
+        attacks: [
+            {
+                display: "Think",
+                damage: -2
+            },
+            {
+                display: "Nail Bat",
+                damage: 18
+            }
+        ]
+    },
+    brain: {
+        name: 'brain',
+        display: 'Brainy Monk',
+        health: 900,
+        attacks: [
+            {
+                display: "Punch",
+                damage: 10
+            },
+            {
+                display: "Total Focus",
+                damage: 35
+            }
+        ]
+    },
+    creep: {
+        name: 'creep',
+        display: 'Creeper',
+        health: 500,
+        attacks: [
+            {
+                display: "Death's Kiss",
+                damage: 50
+            }
+        ]
+    },
+    fish: {
+        name: 'fish',
+        display: 'Angry Fish',
+        health: 1000,
+        attacks: [
+            {
+                display: "Bite",
+                damage: 10
+            }
+        ]
+    },
+    flower: {
+        name: 'flower',
+        display: 'Man-Eating Flower',
+        health: 1100,
+        attacks: [
+            {
+                display: "Thorns",
+                damage: 20
+            }
+        ]
+    },
+    goo: {
+        name: 'goo',
+        display: 'Disgustingly, Terrifying Pile of Goo',
+        health: 2500,
+        attacks: [
+            {
+                display: "Consume",
+                damage: 18
+            }
+        ]
+    },
+    medium_domino: {
+        name: 'medium_domino',
+        display: 'Teenage Domino',
+        health: 1600,
+        attacks: [
+            {
+                display: "Grounded",
+                damage: -5
+            },
+            {
+                display: "Disobedience",
+                damage: 12
+            }
+        ]
+    },
+    shark: {
+        name: 'shark',
+        display: 'Great White Shark',
+        health: 1300,
+        attacks: [
+            {
+                display: "Chomp",
+                damage: 12
+            },
+            {
+                display: "Thrash",
+                    damage: 20
+            }
+        ]
+    },
+    small_domino: {
+        name: 'small_domino',
+        display: 'Baby Domino',
+        health: 2750,
+        attacks: [
+            {
+                display: "Baby",
+                damage: -1
+            },
+            {
+                display: "Cry",
+                damage: 4
+            }
+        ]
+    },
     spider: {
         name: 'spider',
         display: 'Spider',
@@ -15,78 +145,48 @@ const monsters = {
         attacks: [
             {
                 display: "Shoot Web",
-                damage: 10
+                damage: 8
             }
         ]
     },
-    alien: {
-        name: 'alien',
-        display: 'Alien',
-        health: 1500,
+    sword: {
+        name: 'sword',
+        display: 'Curious, Prodding Sword',
+        health: 900,
         attacks: [
             {
-                display: "Spit",
-                damage: 9
+                display: "Stab",
+                damage: 30
+            }
+        ]
+    },
+    tree: {
+        name: 'tree',
+        display: '',
+        health: 1750,
+        attacks: [
+            {
+                display: "Timber",
+                damage: 25
+            },
+            {
+                display: "Stomp",
+                damage: 20
             }
         ]
     },
     worm: {
         name: 'worm',
-        display: 'Worm',
-        health: 700,
+        display: 'Highly Intelligent Worm',
+        health: 800,
         attacks: [
             {
                 display: "Worm",
                 damage: 0
             },
             {
-                display: "Laser",
-                damage: 20
-            }
-        ]
-    },
-    small_domino: {
-        name: 'small_domino',
-        display: 'Domino Baby',
-        health: 1800,
-        attacks: [
-            {
-                display: "Baby",
-                damage: -1
-            },
-            {
-                display: "Cry",
-                damage: 10
-            }
-        ]
-    },
-    medium_domino: {
-        name: 'medium_domino',
-        display: 'Domino Apprentice',
-        health: 1800,
-        attacks: [
-            {
-                display: "Baby",
-                damage: -1
-            },
-            {
-                display: "Cry",
-                damage: 10
-            }
-        ]
-    },
-    papa_domino: {
-        name: 'papa-domino',
-        display: 'Papa Domino',
-        health: 1800,
-        attacks: [
-            {
-                display: "Baby",
-                damage: -1
-            },
-            {
-                display: "Cry",
-                damage: 10
+                display: "Death Ray",
+                damage: 15
             }
         ]
     }
@@ -94,16 +194,25 @@ const monsters = {
 
 const progress = [
     {
-        required: 10,
+        required: 5,
         background: [
             'windows',
-            'cave'
         ],
         enemies: [
            monsters.spider,
-           monsters.alien
         ],
-        healthMultiplier: 1
+        healthMultiplier: .5
+    },
+    {
+        required: 10,
+        background: [
+            'cave'
+        ],
+        enemies: [
+            monsters.spider,
+            monsters.alien
+        ],
+        healthMultiplier: .75
     },
     {
         required: 1,
@@ -111,21 +220,85 @@ const progress = [
             'fire'
         ],
         enemies: [
-           monsters.small_domino
+            monsters.worm,
+            monsters.spider,
+            monsters.alien
         ],
-        healthMultiplier: 5
+        healthMultiplier: 1.25
     },
     {
-        required: 10,
+        required: 1,
         background: [
             'castle'
         ],
         enemies: [
-            monsters.worm,
-            monsters.alien,
-            monsters.spider
+            monsters.small_domino
         ],
         healthMultiplier: 2,
+    },
+    {
+        required: 1,
+        background: [
+            'castle'
+        ],
+        enemies: [
+            monsters.medium_domino
+        ],
+        healthMultiplier: 2,
+    },
+    {
+        required: 1,
+        background: [
+            'castle'
+        ],
+        enemies: [
+            monsters.beefcake_domino
+        ],
+        healthMultiplier: 2,
+    },
+    {
+        required: 10,
+        background: [
+            'ocean'
+        ],
+        enemies: [
+            monsters.fish,
+            monsters.shark
+        ],
+        healthMultiplier: 2.5
+    },
+    {
+        required: 10,
+        background: [
+            'meadow'
+        ],
+        enemies: [
+            monsters.flower,
+            monsters.tree
+        ],
+        healthMultiplier: 3
+    },
+    {
+        required: 10,
+        background: [
+            'dungeon'
+        ],
+        enemies: [
+            monsters.sword,
+            monsters.brain
+        ],
+        healthMultiplier: 3.5
+    },
+    {
+        required: 10,
+        background: [
+            'underworld
+        ],
+        enemies: [
+            monsters.goo,
+            monsters.creep
+        ],
+        healthMultiplier: 4
     }
 ];
 
@@ -380,29 +553,23 @@ class Runtime {
             return undefined;
         }
 
-        let player = this.create(uuid(), name, type);
+        let player = {
+            id: uuid(),
+            name: name.substring(0, 12),
+            level: 1,
+            clicks: 0,
+            type: type,
+            xp: 0,
+            xpreq: 200,
+            skills: JSON.parse(JSON.stringify(skills[type])),
+            clickMult: type === 'mage' ? 0.5 : type === 'paladin' ? 1.0 : 1.5
+        };
 
         this.players.push(player);
         res.cookie('id',  player.id, { maxAge: Number(new Date().getTime()/1000) + 60*60*24*30 });
         console.log("NOTICE: Connected " + player.name);
 
         return player;
-    }
-
-    create(id, name, type) {
-        return {
-            id: id,
-            name: name.substring(0, 12),
-            level: 1,
-            clicks: 0,
-            type: type,
-            xp: 0,
-            health: 100,
-            healthMax: 100,
-            xpreq: 200,
-            skills: JSON.parse(JSON.stringify(skills[type])),
-            clickMult: type === 'mage' ? 0.5 : type === 'paladin' ? 1.0 : 1.5
-        };
     }
 
     getStageKills(){
