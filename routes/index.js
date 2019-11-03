@@ -10,9 +10,6 @@ router.get('/', function(req, res) {
 
     let runtime = req.app.get('runtime');
     res.render('index', { title: 'Click NET', runtime: runtime });
-    req.app.get('wss').clients.forEach(function each(client) {
-        client.send("hello");
-    })
 });
 
 router.get('/quit', function (req, res) {
@@ -30,6 +27,12 @@ function join(req, res) {
     let player = runtime.join(res, req.cookies['id'], req.body.name, req.body.type);
     if (player) {
         res.render('game', {player: player});
+        req.app.get('wss').clients.forEach(function each(client) {
+            client.send(JSON.stringify({
+                type: "message",
+                message: "Player " + player.name + " joined!"
+            }));
+        })
     }
 }
 
