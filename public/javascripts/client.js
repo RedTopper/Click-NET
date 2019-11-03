@@ -23,6 +23,13 @@ let monster = new Vue({
     }
 });
 
+let stats = new Vue({
+    el: '#stats',
+    data: {
+        dps: 0
+    }
+});
+
 $('#attack').click(function () {
     $.getJSON( "/game/attack", function( data ) {});
 });
@@ -44,6 +51,7 @@ function wsUpdate(jsMon, jsPlayers, jsScene) {
     monster.health = jsMon.health;
     monster.background = jsScene.background;
     player.players = jsPlayers;
+    stats.dps = jsMon.dps;
     jsPlayers.forEach(function(jsplayer) {
         if (jsplayer.id === getCookie('id')) {
             player.clicks = jsplayer.clicks;
