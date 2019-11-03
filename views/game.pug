@@ -41,9 +41,7 @@ block content
                     .card
                         h5.card-header Upgrades
                         .list-group.list-group-flush
-                            a.list-group-item Test
-                            a.list-group-item Test2
-                            a.list-group-item Test3
+                            a.list-group-item(v-for="s in list") {{ s.name }}
                 .col-sm-4.p-1
                     #stats.card
                         h5.card-header Combat Info
