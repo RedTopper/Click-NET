@@ -130,71 +130,78 @@ const progress = [
     }
 ];
 
-const skills = [
-    {
-        for: 'paladin',
-        skills: [
-            {
-                name: 'Pummel',
-                cooldown: 0,
-                damage: 2,
-                requiredLvl: 1
-            },
-            {
-                name: 'Protect',
-                cooldown: 20,
-                damage: 0,
-                requiredLvl: 2
-            },
-        ]
-    },
-    {
-        for: 'swordsman',
-        skills: [
-            {
-                name: 'Slash',
-                cooldown: 0,
-                damage: 2,
-                requiredLvl: 1
-            },
-            {
-                name: 'Cleave',
-                cooldown: 15,
-                damage: 70,
-                requiredLvl: 3
-            }
-        ]
-    },
-    {
-        for: 'mage',
-        skills: [
-            {
-                name: 'Lightning Bolt',
-                cooldown: 0,
-                damage: 1,
-                requiredLvl: 1
-            },
-            {
-                name: 'Heal',
-                cooldown: 10,
-                damage: -10,
-                requiredLvl: 1
-            },
-            {
-                name: 'Fireball',
-                cooldown: 20,
-                damage: 50,
-                requiredLvl: 2
-            },
-            {
-                name: 'Tornado',
-                cooldown: 15,
-                damage: 45,
-                requiredLvl: 3
-            }
-        ]
-    }
-];
+const skills = {
+    paladin: [
+        {
+            name: 'pummel',
+            display: 'Pummel',
+            cooldown: 0,
+            timer: 0,
+            damage: 2,
+            requiredLvl: 1
+        },
+        {
+            name: 'protect',
+            display: 'Protect',
+            cooldown: 20,
+            timer: 0,
+            damage: 0,
+            requiredLvl: 2
+        },
+    ],
+    swordsman: [
+        {
+            name: 'slash',
+            display: 'Slash',
+            cooldown: 0,
+            timer: 0,
+            damage: 2,
+            requiredLvl: 1
+        },
+        {
+            name: 'cleave',
+            display: 'Cleave',
+            cooldown: 15,
+            timer: 0,
+            damage: 70,
+            requiredLvl: 3
+        }
+    ],
+    mage: [
+        {
+            name: 'lightning',
+            display: 'Lightning Bolt',
+            cooldown: 0,
+            timer: 0,
+            damage: 1,
+            requiredLvl: 1
+        },
+        {
+            name: 'heal',
+            display: 'Heal',
+            cooldown: 10,
+            timer: 0,
+            damage: -10,
+            requiredLvl: 1
+        },
+        {
+            name: 'fireball',
+            display: 'Fireball',
+            cooldown: 20,
+            timer: 0,
+            damage: 50,
+            requiredLvl: 2
+        },
+        {
+            name: 'tornado',
+            display: 'Tornado',
+            cooldown: 15,
+            timer: 0,
+            damage: 45,
+            requiredLvl: 3
+        }
+    ]
+};
 
 const upgrades = [
     {
@@ -301,7 +308,6 @@ class Runtime {
         this.stage = 0;
         this.players = [];
         this.monster = monsters.spider;
-        this.skills = skills;
         this.scene = {
             background: 'windows'
         };
@@ -382,7 +388,9 @@ class Runtime {
             clicks: 0,
             type: type,
             xp: 0,
-            xpreq: 200
+            xpreq: 200,
+            skills: JSON.parse(JSON.stringify(skills[type])),
+            clickMult: type === 'mage' ? 0.5 : type === 'paladin' ? 1.0 : 1.5
         };
 
         this.players.push(player);
@@ -391,6 +399,11 @@ class Runtime {
 
         return player;
     }
+
+    getStageKills(){
+        return progress[this.stage].required;
+    }
+
 }
 
 module.exports = Runtime;

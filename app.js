@@ -51,6 +51,7 @@ setInterval(function () {
 }, 5000);
 
 setInterval(function () {
+    let StageKills = runtime.getStageKills();
     wss.clients.forEach(function (socket) {
         socket.send(
             JSON.stringify({
@@ -58,8 +59,10 @@ setInterval(function () {
                 monster: runtime.monster,
                 players: runtime.players,
                 scene: runtime.scene,
-                skills: runtime.skills,
-                upgrades: runtime.upgrades
+                stage: runtime.stage,
+                killsStage: runtime.killsStage,
+                killsTotal: runtime.killsTotal,
+                stageKills: StageKills
             })
         );
     })
@@ -69,8 +72,17 @@ setInterval(function () {
     if(runtime.monster.lasthp === undefined){
         runtime.monster.lasthp = runtime.monster.health;
     }
+
     runtime.monster.dps = runtime.monster.lasthp - runtime.monster.health;
     runtime.monster.lasthp = runtime.monster.health;
+
+    runtime.players.forEach(function (value) {
+        value.skills.forEach(function (skill) {
+            if (skill.timer > 0) {
+                skill.timer -= 1;
+            }
+        })
+    })
 }, 1000);
 
 module.exports = app;

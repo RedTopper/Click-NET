@@ -11,7 +11,8 @@ block content
                     #skills.card
                         h5.card-header Spells
                         .list-group.list-group-flush
-                            a.list-group-item(v-for="s in list") {{ s.name }}
+                            a.list-group-item(v-for="s in list" v-bind:onclick="'skill(\"' + s.name + '\")'") {{ s.display }}
+                                span(v-if="s.timer !== 0")  ({{ s.timer }})
                 .col-sm-4.p-1
                     #monster.card
                         img#attack.card-img-top.monster-scene(v-bind:src="'/images/bad/' + name + '.png'" alt="Unknown")
@@ -30,9 +31,9 @@ block content
                                 small  the {{ type }}
                             p.card-text Level: {{ level }}
                             p.card-text Clicks: {{ clicks }}
-                            p.card-text XP {{ xp }} / {{ xpreq }}
+                            p.card-text XP {{ Math.round(xp) }} / {{ Math.round(xpreq) }}
                             .progress
-                                .progress-bar.progress-bar-striped.progress-bar-animated(role="progressbar" v-bind:style='"width: " + (xp/xpreq)*100 + "%"')
+                                .progress-bar.bg-warning.progress-bar-animated(role="progressbar" v-bind:style='"width: " + (xp/xpreq)*100 + "%"')
                         .ul.list-group.list-group-flush
                             li.list-group-item.no-hover(v-for="p in players") {{ p.name }} the {{ p.type }}
             .row
@@ -46,12 +47,15 @@ block content
                         h5.card-header Combat Info
                         .card-body
                             p.card-text Team DPS: {{ dps }}
-
-            .row
-                .col-sm-10.p-1
+                            p.card-text Current Stage: {{ stage }}
+                            p.card-text Monster kills in stage: {{ killsStage }} / {{ stageKills }}
+                            p.card-text Total monster kills: {{ killsTotal }}
+                .col-sm-4.p-1
                     .card
                         h5.card-header Log
-                        p.p-2.card-text.overflow-auto Testserserserasdf
+                        p.p-2.card-text.overflow-auto Nothing here yet!                            
+
+            .row
                 .col-sm-2.p-1
                     a.btn.btn-primary.align-right(href="/quit") Quit Game
 

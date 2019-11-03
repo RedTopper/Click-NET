@@ -10,7 +10,8 @@ let player = new Vue({
         xp: 0,
         xpreq: 200,
         id: "Loading...",
-        players: []
+        players: [],
+        clickMult: 0
     }
 });
 
@@ -28,7 +29,11 @@ let monster = new Vue({
 let stats = new Vue({
     el: '#stats',
     data: {
-        dps: 0
+        dps: 0,
+        stage: 0,
+        killsStage: 0,
+        killsTotal: 0,
+        stageKills: 0
     }
 });
 
@@ -39,60 +44,62 @@ let skills = new Vue({
     }
 });
 
-let upgrades = new Vue({
-    el: '#upgrades',
-    data: {
-        purchases: [],
-    }
-});
+function skill(name) {
+    $.getJSON( "/game/skill/" + name, function( data ) {});
+}
 
 $('#attack').click(function () {
     $.getJSON( "/game/attack", function( data ) {});
+    $(this).effect('shake', 'fast', 2);
 });
 
 ws.onmessage = function (event) {
   let json = JSON.parse(event.data);
-  console.log(json);
   if (json.type === "update") {
-      wsUpdate(json.monster, json.players, json.scene, json.skills, json.upgrades);
+      let jsMon = json.monster;
+      let jsPlayers = json.players;
+      let jsScene = json.scene;
+      let jsStage = json.stage;
+      let jsKillsStage = json.killsStage;
+      let jsKillsTotal = json.killsTotal;
+      let jsStageKills = json.stageKills;
+
+      monster.name = jsMon.name;
+      monster.display = jsMon.display;
+      monster.health = jsMon.health;
+      monster.healthMax = jsMon.healthMax;
+      monster.background = jsScene.background;
+      stats.dps = jsMon.dps;
+      stats.stage = jsStage + 1;
+      stats.killsStage = jsKillsStage;
+      stats.killsTotal = jsKillsTotal;
+      stats.stageKills = jsStageKills;
+      for (let i=0; i<jsPlayers.length; i++) {
+          if (jsPlayers[i].id === getCookie('id')) {
+              player.clicks = jsPlayers[i].clicks;
+              player.level = jsPlayers[i].level;
+              player.name = jsPlayers[i].name;
+              player.type = jsPlayers[i].type;
+              player.id = jsPlayers[i].id;
+              player.xp = jsPlayers[i].xp;
+              player.xpreq = jsPlayers[i].xpreq;
+
+              // skills
+              skills.list = [];
+              for (let j = 0; j < jsPlayers[i].skills.length; j++) {
+                  if (jsPlayers[i].skills[j].requiredLvl <= player.level) {
+                      skills.list.push(jsPlayers[i].skills[j]);
+                  }
+              }
+
+              // remove self from list
+              jsPlayers.splice(i, 1);
+          }
+      }
+
+      player.players = jsPlayers;
   }
 };
-
-function wsUpdate(jsMon, jsPlayers, jsScene, jsSkills, jsUpgrades) {
-    monster.name = jsMon.name;
-    monster.display = jsMon.display;
-    monster.health = jsMon.health;
-    monster.healthMax = jsMon.healthMax;
-    monster.background = jsScene.background;
-    stats.dps = jsMon.dps;
-    for (let i=0; i<jsPlayers.length; i++) {
-        if (jsPlayers[i].id === getCookie('id')) {
-            player.clicks = jsPlayers[i].clicks;
-            player.level = jsPlayers[i].level;
-            player.name = jsPlayers[i].name;
-            player.type = jsPlayers[i].type;
-            player.id = jsPlayers[i].id;
-            player.xp = jsPlayers[i].xp;
-            player.xpreq = jsPlayers[i].xpreq;
-            for (let i = 0; i < jsSkills.length; i++) {
-                if (jsSkills[i].for === player.type) {
-                    skills.list = []
-                    for (let j=0; j<jsSkills[i].skills.length; j++) {
-                        if (jsSkills[i].skills[j].requiredLvl <= player.level) {
-                            skills.list.push(jsSkills[i].skills[j]);
-                        }
-                    }
-                }
-            }
-            for (let i = 0; i < jsUpgrades.length; i++) {
-
-            }
-            console.log(jsPlayers[i]);
-            jsPlayers.splice(i, 1);
-        }
-    }
-    player.players = jsPlayers;
-}
 
 function getCookie(name) {
     let match = document.cookie.match(new RegExp('(^| )' + name + '=([^;]+)'));
