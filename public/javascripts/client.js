@@ -54,22 +54,24 @@ function wsUpdate(jsMon, jsPlayers, jsScene, jsSkills) {
     monster.health = jsMon.health;
     monster.healthMax = jsMon.healthMax;
     monster.background = jsScene.background;
-    player.players = jsPlayers;
     stats.dps = jsMon.dps;
-    jsPlayers.forEach(function(jsplayer) {
-        if (jsplayer.id === getCookie('id')) {
-            player.clicks = jsplayer.clicks;
-            player.level = jsplayer.level;
-            player.name = jsplayer.name;
-            player.type = jsplayer.type;
-            player.id = jsplayer.id;
+    for (let i=0; i<jsPlayers.length; i++) {
+        if (jsPlayers[i].id === getCookie('id')) {
+            player.clicks = jsPlayers[i].clicks;
+            player.level = jsPlayers[i].level;
+            player.name = jsPlayers[i].name;
+            player.type = jsPlayers[i].type;
+            player.id = jsPlayers[i].id;
             for (let i = 0; i < jsSkills.length; i++) {
                 if (jsSkills[i].for === player.type) {
                     skills.list = jsSkills[i].skills;
                 }
             }
+            console.log(jsPlayers[i]);
+            jsPlayers.splice(i, 1);
         }
-    });
+    }
+    player.players = jsPlayers;
 }
 
 function getCookie(name) {
