@@ -7,6 +7,8 @@ let player = new Vue({
         name: '',
         level: 0,
         clicks: 0,
+        xp: 0,
+        xpreq: 200,
         id: "Loading...",
         players: []
     }
@@ -18,8 +20,8 @@ let monster = new Vue({
         background: 'unknown',
         name: 'unknown',
         display: 'the unknown',
-        health: 100,
-        max: 1000
+        health: 1,
+        healthMax: 1
     }
 });
 
@@ -30,37 +32,51 @@ let stats = new Vue({
     }
 });
 
+let skills = new Vue({
+    el: '#skills',
+    data: {
+        list: [],
+    }
+})
+
 $('#attack').click(function () {
     $.getJSON( "/game/attack", function( data ) {});
 });
 
 ws.onmessage = function (event) {
   let json = JSON.parse(event.data);
-  switch (json.type) {
-      case "update":
-          wsUpdate(json.monster, json.players, json.scene);
-          break;
-      default:
-          console.log("Cannot handle " + json.type);
+  console.log(json);
+  if (json.type === "update") {
+      wsUpdate(json.monster, json.players, json.scene, json.skills);
   }
 };
 
-function wsUpdate(jsMon, jsPlayers, jsScene) {
+function wsUpdate(jsMon, jsPlayers, jsScene, jsSkills) {
     monster.name = jsMon.name;
     monster.display = jsMon.display;
     monster.health = jsMon.health;
+    monster.healthMax = jsMon.healthMax;
     monster.background = jsScene.background;
-    player.players = jsPlayers;
     stats.dps = jsMon.dps;
-    jsPlayers.forEach(function(jsplayer) {
-        if (jsplayer.id === getCookie('id')) {
-            player.clicks = jsplayer.clicks;
-            player.level = jsplayer.level;
-            player.name = jsplayer.name;
-            player.type = jsplayer.type;
-            player.id = jsplayer.id;
+    for (let i=0; i<jsPlayers.length; i++) {
+        if (jsPlayers[i].id === getCookie('id')) {
+            player.clicks = jsPlayers[i].clicks;
+            player.level = jsPlayers[i].level;
+            player.name = jsPlayers[i].name;
+            player.type = jsPlayers[i].type;
+            player.id = jsPlayers[i].id;
+            player.xp = jsPlayers[i].xp;
+            player.xpreq = jsPlayers[i].xpreq;
+            for (let i = 0; i < jsSkills.length; i++) {
+                if (jsSkills[i].for === player.type) {
+                    skills.list = jsSkills[i].skills;
+                }
+            }
+            console.log(jsPlayers[i]);
+            jsPlayers.splice(i, 1);
         }
-    });
+    }
+    player.players = jsPlayers;
 }
 
 function getCookie(name) {

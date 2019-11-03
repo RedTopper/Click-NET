@@ -10,6 +10,11 @@ a {
 .titlefont{
     font-family: 'Chelsea Market', cursive;
     color: WHITE;
+    text-shadow:
+            -3px -3px 0 black,
+            3px -3px 0 black,
+            -3px 3px 0 black,
+            3px 3px 0 black;
 }
 
 .name {
@@ -26,6 +31,16 @@ body, html {
 
 .bg {
     background-image: url("/images/background2.jpg");
+    background-attachment: fixed;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    height: 100%;
+    overflow-y: auto;
+}
+
+.bg2 {
+    background-image: url("/images/backgrounds/map_background.png");
     background-attachment: fixed;
     background-position: center;
     background-repeat: no-repeat;
@@ -53,4 +68,12 @@ body, html {
 
 .monster-scene {
     z-index: 1;
+}
+
+.list-group-item.no-hover:hover {
+    background-color: #32383e;
+}
+
+.card {
+    box-shadow: 5px 5px 15px black;
 }
