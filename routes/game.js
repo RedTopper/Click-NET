@@ -35,18 +35,19 @@ game.get('/skill/:name', function (req, res) {
 });
 
 function damage(runtime, player, damage) {
+    let players = runtime.players;
     runtime.monster.health -= damage;
 
     if (runtime.monster.health <= 0) {
-        player.xp += (runtime.monster.healthMax / 10);
-
-        while (player.xp >= player.xpreq) {
-            player.xp -= player.xpreq;
-            player.xpreq *= 1.5;
-            player.level++;
-        }
-
-        runtime.nextMonReal();
+        players.forEach(function(p) {
+            p.xp += ((runtime.monster.healthMax / 10) * (p.id === player.id ? 1.0 : 0.5));
+            while (p.xp >= p.xpreq) {
+                p.xp -= p.xpreq;
+                p.xpreq *= 1.5;
+                p.level++;
+            }
+            runtime.nextMonReal();
+        });
     }
 }
 
