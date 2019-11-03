@@ -7,6 +7,8 @@ let player = new Vue({
         name: '',
         level: 0,
         clicks: 0,
+        xp: 0,
+        xpreq: 200,
         id: "Loading...",
         players: []
     }
@@ -43,6 +45,7 @@ $('#attack').click(function () {
 
 ws.onmessage = function (event) {
   let json = JSON.parse(event.data);
+  console.log(json);
   if (json.type === "update") {
       wsUpdate(json.monster, json.players, json.scene, json.skills);
   }
@@ -62,6 +65,8 @@ function wsUpdate(jsMon, jsPlayers, jsScene, jsSkills) {
             player.name = jsPlayers[i].name;
             player.type = jsPlayers[i].type;
             player.id = jsPlayers[i].id;
+            player.xp = jsPlayers[i].xp;
+            player.xpreq = jsPlayers[i].xpreq;
             for (let i = 0; i < jsSkills.length; i++) {
                 if (jsSkills[i].for === player.type) {
                     skills.list = jsSkills[i].skills;

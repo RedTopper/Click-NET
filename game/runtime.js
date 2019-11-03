@@ -309,7 +309,9 @@ class Runtime {
             name: name.substring(0, 12),
             level: 1,
             clicks: 0,
-            type: type
+            type: type,
+            xp: 0,
+            xpreq: 200
         };
 
         this.players.push(player);

@@ -30,7 +30,9 @@ block content
                                 small  the {{ type }}
                             p.card-text Level: {{ level }}
                             p.card-text Clicks: {{ clicks }}
-                            small.card-text ID: {{ id }}
+                            p.card-text XP {{ xp }} / {{ xpreq }}
+                            .progress
+                                .progress-bar.progress-bar-striped.progress-bar-animated(role="progressbar" v-bind:style='"width: " + (xp/xpreq)*100 + "%"')
                         .ul.list-group.list-group-flush
                             li.list-group-item.no-hover(v-for="p in players") {{ p.name }} the {{ p.type }}
             .row
@@ -53,7 +55,7 @@ block content
                         h5.card-header Log
                         p.p-2.card-text.overflow-auto Testserserserasdf
                 .col-sm-2.p-1
-                    a.btn.btn-primary.align-right(href="/quit") Leave Game
+                    a.btn.btn-primary.align-right(href="/quit") Quit Game
 
 
             script(src="/libraries/vue.js")
