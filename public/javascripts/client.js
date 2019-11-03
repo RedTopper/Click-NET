@@ -44,6 +44,10 @@ let skills = new Vue({
     }
 });
 
+function skill(name) {
+    $.getJSON( "/game/skill/" + name, function( data ) {});
+}
+
 $('#attack').click(function () {
     $.getJSON( "/game/attack", function( data ) {});
     $(this).effect('shake', 'fast', 2);
@@ -79,6 +83,8 @@ ws.onmessage = function (event) {
               player.id = jsPlayers[i].id;
               player.xp = jsPlayers[i].xp;
               player.xpreq = jsPlayers[i].xpreq;
+
+              // skills
               skills.list = [];
               for (let j = 0; j < jsPlayers[i].skills.length; j++) {
                   if (jsPlayers[i].skills[j].requiredLvl <= player.level) {

@@ -4,11 +4,40 @@ const game = express.Router();
 game.get('/attack', function(req, res) {
     let runtime = req.app.get('runtime');
     let player = runtime.get(req.cookies['id']);
-    let players = runtime.players;
-    console.log(players);
     if (!player) return;
 
-    runtime.monster.health -= 1000 * player.level * player.clickMult;
+    damage(runtime, player, 1000 * player.level * player.clickMult);
+
+    player.clicks++;
+    res.type("application/json");
+    res.end(JSON.stringify({status: "ok"}));
+});
+
+game.get('/skill/:name', function (req, res) {
+    let name = req.params.name;
+    let runtime = req.app.get('runtime');
+    let player = runtime.get(req.cookies['id']);
+    if (!player) return;
+
+    for (let i = 0; i < player.skills.length; i++) {
+        let skill = player.skills[i];
+        if (skill.name === name && skill.timer === 0) {
+            skill.timer = skill.cooldown;
+            damage(runtime, player, skill.damage);
+            res.type("application/json");
+            res.end(JSON.stringify({status: "ok"}));
+            return;
+        }
+    }
+
+    res.type("application/json");
+    res.end(JSON.stringify({status: "no"}));
+});
+
+function damage(runtime, player, damage) {
+    let players = runtime.players;
+    runtime.monster.health -= damage;
+
     if (runtime.monster.health <= 0) {
         players.forEach(function(p) {
             p.xp += ((runtime.monster.healthMax / 10) * (p.id === player.id ? 1.0 : 0.5));
@@ -20,9 +49,6 @@ game.get('/attack', function(req, res) {
             runtime.nextMonReal();
         });
     }
-    player.clicks++;
-    res.type("application/json");
-    res.end(JSON.stringify({some: "thing"}));
-});
+}
 
 module.exports = game;

@@ -133,14 +133,16 @@ const progress = [
 const skills = {
     paladin: [
         {
-            name: 'Pummel',
+            name: 'pummel',
+            display: 'Pummel',
             cooldown: 0,
             timer: 0,
             damage: 2,
             requiredLvl: 1
         },
         {
-            name: 'Protect',
+            name: 'protect',
+            display: 'Protect',
             cooldown: 20,
             timer: 0,
             damage: 0,
@@ -149,14 +151,16 @@ const skills = {
     ],
     swordsman: [
         {
-            name: 'Slash',
+            name: 'slash',
+            display: 'Slash',
             cooldown: 0,
             timer: 0,
             damage: 2,
             requiredLvl: 1
         },
         {
-            name: 'Cleave',
+            name: 'cleave',
+            display: 'Cleave',
             cooldown: 15,
             timer: 0,
             damage: 70,
@@ -165,28 +169,32 @@ const skills = {
     ],
     mage: [
         {
-            name: 'Lightning Bolt',
+            name: 'lightning',
+            display: 'Lightning Bolt',
             cooldown: 0,
             timer: 0,
             damage: 1,
             requiredLvl: 1
         },
         {
-            name: 'Heal',
+            name: 'heal',
+            display: 'Heal',
             cooldown: 10,
             timer: 0,
             damage: -10,
             requiredLvl: 1
         },
         {
-            name: 'Fireball',
+            name: 'fireball',
+            display: 'Fireball',
             cooldown: 20,
             timer: 0,
             damage: 50,
             requiredLvl: 2
         },
         {
-            name: 'Tornado',
+            name: 'tornado',
+            display: 'Tornado',
             cooldown: 15,
             timer: 0,
             damage: 45,
