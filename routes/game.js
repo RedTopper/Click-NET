@@ -6,6 +6,7 @@ game.get('/attack', function(req, res) {
     let player = runtime.get(req.cookies['id']);
     if (!player) return;
 
+    damage(runtime, player, req, 1000 * player.clickMult);
     damage(runtime, player, req,10 * player.level * player.clickMult);
 
     player.clicks++;
@@ -26,6 +27,13 @@ game.get('/skill/:name', function (req, res) {
 
             damage(runtime, player, req, skill.damage);
 
+            runtime.players.forEach(function (value) {
+                value.health -= skill.damage;
+                if (value.health > value.healthMax) {
+                    value.health = value.healthMax;
+                }
+            });
+
             req.app.get('wss').clients.forEach(function each(client) {
                 client.send(JSON.stringify({
                     type: "message",
@@ -45,7 +53,7 @@ game.get('/skill/:name', function (req, res) {
 
 function damage(runtime, player, req, damage) {
     let players = runtime.players;
-    runtime.monster.health -= damage;
+    runtime.monster.health -= damage * player.level;
 
     if (runtime.monster.health <= 0) {
         req.app.get('wss').clients.forEach(function each(client) {

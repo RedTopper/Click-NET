@@ -85,4 +85,40 @@ setInterval(function () {
     })
 }, 1000);
 
+
+function attack() {
+    if (runtime.players.length === 0) return;
+
+    let i = Math.floor(Math.random() * runtime.players.length);
+    let player = runtime.players[i];
+    let attack = runtime.monster.attacks[Math.floor(Math.random() * runtime.monster.attacks.length)];
+
+    player.health -= attack.damage;
+
+    wss.clients.forEach(function each(client) {
+        client.send(JSON.stringify({
+            type: "message",
+            message: player.name + " was attacked by the " + runtime.monster.display + " with " + attack.display + "!"
+        }));
+    });
+
+    if (player.health <= 0) {
+        runtime.players[i] = runtime.create(player.id, player.name, player.type);
+        wss.clients.forEach(function each(client) {
+            client.send(JSON.stringify({
+                type: "message",
+                message: player.name + " kicked the bucket!"
+            }));
+        });
+    }
+}
+
+(function loop() {
+    let rand = Math.round(Math.random() * 5000) + 5000;
+    setTimeout(function() {
+        attack();
+        loop();
+    }, rand);
+}());
+
 module.exports = app;

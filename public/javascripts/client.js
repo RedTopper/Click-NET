@@ -11,7 +11,9 @@ let player = new Vue({
         xpreq: 200,
         id: "Loading...",
         players: [],
-        clickMult: 0
+        clickMult: 0,
+        health: 100,
+        healthMax: 100,
     }
 });
 
@@ -60,8 +62,7 @@ function skill(name) {
 }
 
 $('#attack').click(function () {
-    $.getJSON("/game/attack", function (data) {
-    });
+    $.getJSON("/game/attack", function (data) {});
     $(this).effect('shake', 'fast', 2);
 });
 
@@ -95,6 +96,8 @@ ws.onmessage = function (event) {
                 player.id = jsPlayers[i].id;
                 player.xp = jsPlayers[i].xp;
                 player.xpreq = jsPlayers[i].xpreq;
+                player.health = jsPlayers[i].health;
+                player.healthMax = jsPlayers[i].healthMax;
 
                 // skills
                 skills.list = [];

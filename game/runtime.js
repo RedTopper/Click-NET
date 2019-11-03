@@ -307,17 +307,25 @@ const skills = {
         {
             name: 'pummel',
             display: 'Pummel',
-            cooldown: 0,
+            cooldown: 5,
             timer: 0,
-            damage: 2,
+            damage: 50,
             requiredLvl: 1
         },
         {
-            name: 'protect',
-            display: 'Protect',
+            name: 'bash',
+            display: 'Bash',
             cooldown: 20,
             timer: 0,
-            damage: 0,
+            damage: 1000,
+            requiredLvl: 3
+        },
+        {
+            name: 'heal',
+            display: 'Heal',
+            cooldown: 30,
+            timer: 0,
+            damage: -80,
             requiredLvl: 2
         },
     ],
@@ -325,17 +333,17 @@ const skills = {
         {
             name: 'slash',
             display: 'Slash',
-            cooldown: 0,
+            cooldown: 5,
             timer: 0,
-            damage: 2,
+            damage: 100,
             requiredLvl: 1
         },
         {
             name: 'cleave',
             display: 'Cleave',
-            cooldown: 15,
+            cooldown: 40,
             timer: 0,
-            damage: 70,
+            damage: 2000,
             requiredLvl: 3
         }
     ],
@@ -343,9 +351,9 @@ const skills = {
         {
             name: 'lightning',
             display: 'Lightning Bolt',
-            cooldown: 0,
+            cooldown: 5,
             timer: 0,
-            damage: 1,
+            damage: 300,
             requiredLvl: 1
         },
         {
@@ -353,7 +361,7 @@ const skills = {
             display: 'Heal',
             cooldown: 10,
             timer: 0,
-            damage: -10,
+            damage: -20,
             requiredLvl: 1
         },
         {
@@ -362,81 +370,18 @@ const skills = {
             cooldown: 20,
             timer: 0,
             damage: 50,
-            requiredLvl: 2
+            requiredLvl: 3
         },
         {
             name: 'tornado',
             display: 'Tornado',
-            cooldown: 15,
+            cooldown: 70,
             timer: 0,
-            damage: 45,
-            requiredLvl: 3
+            damage: 4000,
+            requiredLvl: 5
         }
     ]
 };
-
-const upgrades = [
-    {
-        for: 'Clicker Damage',
-        stats: [
-            {
-                amount: 0,
-                cost: 25,
-                multiplier: 1.1
-            }
-        ]
-    },
-    {
-        for: 'Spell Effectiveness',
-        stats: [
-            {
-                amount: 0,
-                cost: 50,
-                multiplier: 1.25
-            }
-        ]
-    },
-    {
-        for: 'Clicker Minion',
-        stats: [
-            {
-                amount: 0,
-                cost: 50,
-                damage: 1
-            }
-        ]
-    },
-    {
-        for: 'Clicker Apprentice',
-        stats: [
-            {
-                amount: 0,
-                cost: 100,
-                damage: 2
-            }
-        ]
-    },
-    {
-        for: 'Clicker Master',
-        stats: [
-            {
-                amount: 0,
-                cost: 400,
-                damage: 5
-            }
-        ]
-    },
-    {
-        for: 'Clicker Kanye',
-        stats: [
-            {
-                amount: 0,
-                cost: 2000,
-                damage: 25
-            }
-        ]
-    }
-];
 
 class Runtime {
     constructor() {
@@ -553,23 +498,29 @@ class Runtime {
             return undefined;
         }
 
-        let player = {
-            id: uuid(),
-            name: name.substring(0, 12),
-            level: 1,
-            clicks: 0,
-            type: type,
-            xp: 0,
-            xpreq: 200,
-            skills: JSON.parse(JSON.stringify(skills[type])),
-            clickMult: type === 'mage' ? 0.5 : type === 'paladin' ? 1.0 : 1.5
-        };
+        let player = this.create(uuid(), name, type);
 
         this.players.push(player);
         res.cookie('id',  player.id, { maxAge: Number(new Date().getTime()/1000) + 60*60*24*30 });
         console.log("NOTICE: Connected " + player.name);
 
         return player;
+    }
+
+    create(id, name, type) {
+        return {
+            id: id,
+            name: name.substring(0, 12),
+            level: 1,
+            clicks: 0,
+            type: type,
+            xp: 0,
+            health: 100,
+            healthMax: 100,
+            xpreq: 200,
+            skills: JSON.parse(JSON.stringify(skills[type])),
+            clickMult: type === 'mage' ? 0.5 : type === 'paladin' ? 1.0 : 1.5
+        };
     }
 
     getStageKills(){
