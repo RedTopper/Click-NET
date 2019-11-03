@@ -2,15 +2,11 @@ doctype html
 html
     head
         title= title
-        script(src='/libraries/jquery-3.4.1.min.js' integrity='sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=' crossorigin='anonymous')
-        script(src='/libraries/bootstrap.min.js' integrity='sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM' crossorigin='anonymous')
+        script(src='/libraries/jquery-3.4.1.min.js')
+        script(src='/libraries/bootstrap.min.js')
         meta(name="viewport" content="width=device-width, initial-scale=1")
         link(href="https://fonts.googleapis.com/css?family=Bungee+Shade|Chelsea+Market|Codystar|Freckle+Face|Megrim|Rubik+Mono+One&display=swap" rel="stylesheet")
         link(rel='stylesheet', href='/stylesheets/style.css')
-        link(
-            href="https://stackpath.bootstrapcdn.com/bootswatch/4.3.1/slate/bootstrap.min.css",
-            rel="stylesheet",
-            integrity="sha384-FBPbZPVh+7ks5JJ70RJmIaqyGnvMbeJ5JQfEbW0Ac6ErfvEg9yG56JQJuMNptWsH",
-            crossorigin="anonymous")
+        link(rel="stylesheet", href="/libraries/bootstrap.min.css")
     body.p-0
         block content
