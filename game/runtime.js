@@ -9,6 +9,7 @@ const types = [
 
 const monsters = {
     spider: {
+        name: 'spider',
         display: 'Spider',
         health: 1000,
         attacks: {
@@ -19,6 +20,7 @@ const monsters = {
         }
     },
     alien: {
+        name: 'alien',
         display: 'Alien',
         health: 1500,
         attacks: {
@@ -29,6 +31,7 @@ const monsters = {
         }
     },
     worm: {
+        name: 'worm',
         display: 'Worm',
         health: 700,
         attacks: {
@@ -43,6 +46,7 @@ const monsters = {
         }
     },
     small_domino: {
+        name: 'small_domino',
         display: 'Domino Baby',
         health: 1800,
         attacks: {
@@ -95,6 +99,67 @@ const progress = [
     }
 ];
 
+const skills = [
+    {
+        'paladin': {
+            0: {
+                name: 'pummel',
+                cooldown: 0,
+                damage: 2,
+            },
+            1: {
+                name: 'protect',
+                cooldown: 20,
+                damage: 0,
+            },
+        },
+        'swordsman': {
+            0: [
+                {
+                    name: 'slash',
+                    cooldown: 0,
+                    damage: 2
+                },
+            ],
+            1: [
+                {
+                    name: 'cleave',
+                    cooldown: 15,
+                    damage: 70
+                },
+            ]
+        },
+        'mage': {
+            0: [
+                {
+                    name: 'lightning bolt',
+                    cooldown: 0,
+                    damage: 1
+                },
+                {
+                    name: 'heal',
+                    cooldown: 10,
+                    damage: -10
+                },
+            ],
+            2: [
+                {
+                    name: 'fireball',
+                    cooldown: 20,
+                    damage: 50
+                },
+            ],
+            3: [
+                {
+                    name: 'tornado',
+                    cooldown: 15,
+                    damage: 45
+                },
+            ]
+        },
+    }
+];
+
 class Runtime {
     constructor() {
         this.defaults();
@@ -106,6 +171,7 @@ class Runtime {
             }
 
             let json = JSON.parse(data);
+            console.log(json);
             runtime.load(json);
             console.log("Loaded!");
         });
@@ -117,6 +183,9 @@ class Runtime {
         this.stage = 0;
         this.players = [];
         this.monster = monsters.spider;
+        this.scene = {
+            background: 'windows'
+        }
     }
 
     load(json) {
@@ -125,6 +194,7 @@ class Runtime {
         this.key(json, 'killsStage');
         this.key(json, 'killsTotal');
         this.key(json, 'monster');
+        this.key(json, 'scene');
     }
 
     save() {

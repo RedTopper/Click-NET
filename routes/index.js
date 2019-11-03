@@ -28,7 +28,6 @@ router.post('/game', join);
 function join(req, res) {
     let runtime = req.app.get('runtime');
     let player = runtime.join(res, req.cookies['id'], req.body.name, req.body.type);
-
     if (player) {
         res.render('game', {player: player});
     }
