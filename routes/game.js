@@ -69,6 +69,7 @@ function damage(runtime, player, req, damage) {
                 p.xp -= p.xpreq;
                 p.xpreq *= 1.5;
                 p.level++;
+                p.health += (20*p.level);
             }
             runtime.nextMonReal();
         })
