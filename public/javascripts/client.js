@@ -23,22 +23,25 @@ let monster = new Vue({
     }
 });
 
+let skills = new Vue({
+    el: '#skills',
+    data: {
+        list: [],
+    }
+})
+
 $('#attack').click(function () {
     $.getJSON( "/game/attack", function( data ) {});
 });
 
 ws.onmessage = function (event) {
   let json = JSON.parse(event.data);
-  switch (json.type) {
-      case "update":
-          wsUpdate(json.monster, json.players, json.scene);
-          break;
-      default:
-          console.log("Cannot handle " + json.type);
+  if (json.type === "update") {
+      wsUpdate(json.monster, json.players, json.scene, json.skills);
   }
 };
 
-function wsUpdate(jsMon, jsPlayers, jsScene) {
+function wsUpdate(jsMon, jsPlayers, jsScene, jsSkills) {
     monster.name = jsMon.name;
     monster.display = jsMon.display;
     monster.health = jsMon.health;
@@ -51,6 +54,11 @@ function wsUpdate(jsMon, jsPlayers, jsScene) {
             player.name = jsplayer.name;
             player.type = jsplayer.type;
             player.id = jsplayer.id;
+            for (let i = 0; i < jsSkills.length; i++) {
+                if (jsSkills[i].for === player.type) {
+                    skills.list = jsSkills[i].skills;
+                }
+            }
         }
     });
 }

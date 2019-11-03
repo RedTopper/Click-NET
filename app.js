@@ -57,7 +57,8 @@ setInterval(function () {
                 type: 'update',
                 monster: runtime.monster,
                 players: runtime.players,
-                scene: runtime.scene
+                scene: runtime.scene,
+                skills: runtime.skills
             })
         );
     })

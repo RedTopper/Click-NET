@@ -99,64 +99,61 @@ const progress = [
     }
 ];
 
-const skills = [
+const skills  = [
     {
-        'paladin': {
-            0: {
-                name: 'pummel',
+        for: 'paladin',
+        skills: [
+            {
+                name: 'Pummel',
                 cooldown: 0,
                 damage: 2,
             },
-            1: {
-                name: 'protect',
+            {
+                name: 'Protect',
                 cooldown: 20,
                 damage: 0,
             },
-        },
-        'swordsman': {
-            0: [
-                {
-                    name: 'slash',
-                    cooldown: 0,
-                    damage: 2
-                },
-            ],
-            1: [
-                {
-                    name: 'cleave',
-                    cooldown: 15,
-                    damage: 70
-                },
-            ]
-        },
-        'mage': {
-            0: [
-                {
-                    name: 'lightning bolt',
-                    cooldown: 0,
-                    damage: 1
-                },
-                {
-                    name: 'heal',
-                    cooldown: 10,
-                    damage: -10
-                },
-            ],
-            2: [
-                {
-                    name: 'fireball',
-                    cooldown: 20,
-                    damage: 50
-                },
-            ],
-            3: [
-                {
-                    name: 'tornado',
-                    cooldown: 15,
-                    damage: 45
-                },
-            ]
-        },
+        ]
+    },
+    {
+        for: 'swordsman',
+        skills: [
+            {
+                name: 'Slash',
+                cooldown: 0,
+                damage: 2
+            },
+            {
+                name: 'Cleave',
+                cooldown: 15,
+                damage: 70
+            }
+        ]
+    },
+    {
+        for: 'mage',
+        skills: [
+            {
+                name: 'Lightning Bolt',
+                cooldown: 0,
+                damage: 1
+            },
+            {
+                name: 'Heal',
+                cooldown: 10,
+                damage: -10
+            },
+            {
+                name: 'Fireball',
+                cooldown: 20,
+                damage: 50
+            },
+            {
+                name: 'Tornado',
+                cooldown: 15,
+                damage: 45
+            }
+        ]
     }
 ];
 
@@ -183,6 +180,7 @@ class Runtime {
         this.stage = 0;
         this.players = [];
         this.monster = monsters.spider;
+        this.skills = skills;
         this.scene = {
             background: 'windows'
         }

@@ -7,12 +7,10 @@ block content
                 h1.display-1.titlefont.text-center Click-NET
         .row
             .col-sm-4.p-1
-                #spells.card
+                #skills.card
                     h5.card-header Spells
                     .list-group.list-group-flush
-                        a.list-group-item.active Test
-                        a.list-group-item Test2
-                        a.list-group-item Test3
+                        a.list-group-item(v-for="s in list") {{ s.name }}
             .col-sm-4.p-1
                 #monster.card
                     img#attack.card-img-top.monster-scene(v-bind:src="'/images/bad/' + name + '.png'" alt="Unknown")
