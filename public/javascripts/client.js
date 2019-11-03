@@ -50,48 +50,49 @@ $('#attack').click(function () {
 
 ws.onmessage = function (event) {
   let json = JSON.parse(event.data);
-  console.log(json);
   if (json.type === "update") {
-      wsUpdate(json.monster, json.players, json.scene, json.skills, json.stage, json.killsStage, json.killsTotal, json.stageKills);
+      let jsMon = json.monster;
+      let jsPlayers = json.players;
+      let jsScene = json.scene;
+      let jsStage = json.stage;
+      let jsKillsStage = json.killsStage;
+      let jsKillsTotal = json.killsTotal;
+      let jsStageKills = json.stageKills;
+
+      monster.name = jsMon.name;
+      monster.display = jsMon.display;
+      monster.health = jsMon.health;
+      monster.healthMax = jsMon.healthMax;
+      monster.background = jsScene.background;
+      stats.dps = jsMon.dps;
+      stats.stage = jsStage + 1;
+      stats.killsStage = jsKillsStage;
+      stats.killsTotal = jsKillsTotal;
+      stats.stageKills = jsStageKills;
+      for (let i=0; i<jsPlayers.length; i++) {
+          if (jsPlayers[i].id === getCookie('id')) {
+              player.clicks = jsPlayers[i].clicks;
+              player.level = jsPlayers[i].level;
+              player.name = jsPlayers[i].name;
+              player.type = jsPlayers[i].type;
+              player.id = jsPlayers[i].id;
+              player.xp = jsPlayers[i].xp;
+              player.xpreq = jsPlayers[i].xpreq;
+              skills.list = [];
+              for (let j = 0; j < jsPlayers[i].skills.length; j++) {
+                  if (jsPlayers[i].skills[j].requiredLvl <= player.level) {
+                      skills.list.push(jsPlayers[i].skills[j]);
+                  }
+              }
+
+              // remove self from list
+              jsPlayers.splice(i, 1);
+          }
+      }
+
+      player.players = jsPlayers;
   }
 };
-
-function wsUpdate(jsMon, jsPlayers, jsScene, jsSkills, jsStage, jsKillsStage, jsKillsTotal, jsStageKills) {
-    monster.name = jsMon.name;
-    monster.display = jsMon.display;
-    monster.health = jsMon.health;
-    monster.healthMax = jsMon.healthMax;
-    monster.background = jsScene.background;
-    stats.dps = jsMon.dps;
-    stats.stage = jsStage + 1;
-    stats.killsStage = jsKillsStage;
-    stats.killsTotal = jsKillsTotal;
-    stats.stageKills = jsStageKills;
-    for (let i=0; i<jsPlayers.length; i++) {
-        if (jsPlayers[i].id === getCookie('id')) {
-            player.clicks = jsPlayers[i].clicks;
-            player.level = jsPlayers[i].level;
-            player.name = jsPlayers[i].name;
-            player.type = jsPlayers[i].type;
-            player.id = jsPlayers[i].id;
-            player.xp = jsPlayers[i].xp;
-            player.xpreq = jsPlayers[i].xpreq;
-            for (let i = 0; i < jsSkills.length; i++) {
-                if (jsSkills[i].for === player.type) {
-                    skills.list = [];
-                    for (let j=0; j<jsSkills[i].skills.length; j++) {
-                        if (jsSkills[i].skills[j].requiredLvl <= player.level) {
-                            skills.list.push(jsSkills[i].skills[j]);
-                        }
-                    }
-                }
-            }
-            console.log(jsPlayers[i]);
-            jsPlayers.splice(i, 1);
-        }
-    }
-    player.players = jsPlayers;
-}
 
 function getCookie(name) {
     let match = document.cookie.match(new RegExp('(^| )' + name + '=([^;]+)'));
