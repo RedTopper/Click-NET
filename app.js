@@ -59,7 +59,6 @@ setInterval(function () {
                 monster: runtime.monster,
                 players: runtime.players,
                 scene: runtime.scene,
-                skills: runtime.skills,
                 stage: runtime.stage,
                 killsStage: runtime.killsStage,
                 killsTotal: runtime.killsTotal,
