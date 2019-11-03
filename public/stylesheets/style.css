@@ -10,7 +10,11 @@ a {
 .titlefont{
     font-family: 'Chelsea Market', cursive;
     color: WHITE;
-    text-shadow: 5px 5px 0 black;
+    text-shadow:
+            -3px -3px 0 black,
+            3px -3px 0 black,
+            -3px 3px 0 black,
+            3px 3px 0 black;
 }
 
 .name {
