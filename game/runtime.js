@@ -194,7 +194,8 @@ const upgrades = [
         stats: [
             {
                 amount: 0,
-                cost: 25
+                cost: 25,
+                multiplier: 1.1
             }
         ]
     },
@@ -203,7 +204,7 @@ const upgrades = [
         stats: [
             {
                 amount: 0,
-                cost: 25,
+                cost: 50,
                 multiplier: 1.25
             }
         ]
@@ -213,7 +214,7 @@ const upgrades = [
         stats: [
             {
                 amount: 0,
-                cost: 25,
+                cost: 50,
                 damage: 1
             }
         ]
@@ -223,7 +224,7 @@ const upgrades = [
         stats: [
             {
                 amount: 0,
-                cost: 50,
+                cost: 100,
                 damage: 2
             }
         ]
@@ -233,7 +234,7 @@ const upgrades = [
         stats: [
             {
                 amount: 0,
-                cost: 200,
+                cost: 400,
                 damage: 5
             }
         ]
@@ -243,7 +244,7 @@ const upgrades = [
         stats: [
             {
                 amount: 0,
-                cost: 1000,
+                cost: 2000,
                 damage: 25
             }
         ]
